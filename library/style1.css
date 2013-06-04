@@ -1,0 +1,39 @@
+.roundtable{
+	border:2px solid #0099FF;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+.roundtableouter{
+	border:2px solid #FF9966;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+.roundtabletop{
+	border:2px solid #003366;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+.roundtableallcat{
+	border:2px solid #FF9966;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+
+.leftlisttext {
+	font-family:Prose Antiqua, Lucida Handwriting;
+	font-weight:bold;
+	text-align:left;
+	font-size: 12pt;
+	padding-left: 35px;
+	font-weight: bold;
+	color:#0000CC;
+}

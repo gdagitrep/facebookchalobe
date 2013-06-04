@@ -1,0 +1,12 @@
+.entryTableHeader{
+    background: dodgerblue;
+}
+.content{
+    background: cornsilk;
+}
+
+.entryTableHeader td{
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
+}

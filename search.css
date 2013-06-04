@@ -1,0 +1,17 @@
+/* 
+    Document   : search
+    Created on : 27 Jun, 2012, 4:08:58 PM
+    Author     : ram
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#text {
+    font-family: serif;
+    font-size: small;
+    width: 700px;
+}
