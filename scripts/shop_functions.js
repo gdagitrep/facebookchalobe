@@ -116,13 +116,13 @@
 
 });
 })(jQuery);
-function ajaxcall(action,uid,qid,n, sel) // n for question no starting from 1
+function ajaxcall(action,uid,qid,n, sel,whcs) // n for question no starting from 1
   {
     //-----------------------------------------------------------------------
     // 2) Send a http request with AJAX http://api.jquery.com/jQuery.ajax/
     //-----------------------------------------------------------------------
     return jQuery.ajax({                                      
-      url: 'include/questions.php?action='+action+'&uid='+uid+'&QID='+qid+'&N='+n+'&sel='+sel,                  //the script to call to get data          
+      url: 'include/questions.php?action='+action+'&uid='+uid+'&QID='+qid+'&N='+n+'&sel='+sel+whcs,                  //the script to call to get data          
       data: "",                        //you can insert url argumnets here to pass to api.php
                                        //for example "id=5&parent=6"
       dataType: 'json'               //data format      
@@ -143,15 +143,15 @@ function ajaxcall(action,uid,qid,n, sel) // n for question no starting from 1
   
 function getquestion(uidjs,qidjs,n,nq){ // n is the number (starting from 1) of question, 
                                     //while qid is the id of the question as per table
-  var promise = ajaxcall('getq',uidjs,qidjs,n,-1);
+  var promise = ajaxcall('getq',uidjs,qidjs,n,-1,'&');
   promise.success(function(data){
       jQuery("#questiontext").html(data[0]);
       var qsolved,w,h,c;
       score= data[5]; // *****
       if(uidjs != 'notknown'){
           if(data[1]=='1') {//i.e. there is entry for this question in database for this user
-              qsolved= data[2];
-              w=1;h=1;c=1;score=1; //change this line
+              qsolved= data[1];
+              w=data[2];h=data[3];c=data[4];score=data[5]; 
           }
           else{
               qsolved= null;
@@ -188,7 +188,9 @@ function getquestion(uidjs,qidjs,n,nq){ // n is the number (starting from 1) of 
                   correctans(n,nq);
               }
               else{
-                    refreshquestionnaire(n,nq);
+                wronganswer(n,nq);
+                jQuery('#msg').html('<span style="color: red">Wrong attempt!!Get hint, and try again</span>');
+                    //refreshquestionnaire(n,nq);
               }
           }
           if(w==2){
@@ -215,7 +217,7 @@ function submitanswer(qidjs,uidjs,n,nq){
   var ajaxcorans;
   var w,h,c,s;
 
-  var promise = ajaxcall('geta',uidjs,qidjs,-1,selected.val());
+  var promise = ajaxcall('geta',uidjs,qidjs,-1,selected.val(),'&');
   if(uidjs=='notknown'){
     var qsolved=checkCookie(qidjs);
     if(qsolved!=null && qsolved!=""){
@@ -228,37 +230,76 @@ function submitanswer(qidjs,uidjs,n,nq){
       else{w=0; h=0; c=0; 
           s= score; // default score of the question from questions table
       }
-      
+  }
     promise.success(function(data){
         ajaxcorans = data[0]; //whether selection was correct or not,   
                             //i.e. option number if correct otherwise 0
+        if(uidjs !='notknown'){
+            //for known user
+            if(data[1]=="1"){//i.e. there is entry for this question in database for this user
+            //$ret : 
+            //1 -> 0 for question record not in db, 1 for opposite
+            //2 -> wronged(1) or not (0)
+            //3 -> hinted (1) or not (0)
+            //4 -> completed (1) or not (0)
+            //5 -> score -- left after all kind of deductions for every wrong action/ hint action/ 
+                            //or 0 if two wrong tries have been exhausted
+            w=data[2]; h= data[3];c=data[4];score=s= data[5];
+            }
+            else
+                {w=0; h=0; c=0; s=score;}
+        }
         if(ajaxcorans != 0){
             correctans(n,nq);
-            setCookie('qid'+qidjs,w+'&'+h+'&'+'1&'+s,1); //w&h&c&s
+            if(uidjs=='notknown')
+                setCookie('qid'+qidjs,w+'&'+h+'&'+'1&'+s,1); //w&h&c&s
+            else{
+                var succ;
+                var promise1 = ajaxcall('setquserdetails',uidjs,qidjs,-1,-1,'&w='+w+'&h='+h+'&c=1&s='+s);
+                promise1.success(function(data1){
+                    succ=data1[0]; //of no use for now
+                });
+            }
         }
         else{
              wronganswer(n,nq);
              w=w+1;
              if(w<2){
                 s= score = score/2;
-                setCookie('qid'+qidjs,w+'&'+h+'&'+'0&'+s,1);
-                //set Wronged text as new w
-                //update scores visible above
+                if(uidjs=='notknown')
+                    setCookie('qid'+qidjs,w+'&'+h+'&'+'0&'+s,1);
+                    //set Wronged text as new w
+                    //update scores visible above
+                else{
+                    var succ;
+                    var promise1 = ajaxcall('setquserdetails',uidjs,qidjs,-1,-1,'&w='+w+'&h='+h+'&c=0&s='+s);
+                    promise1.success(function(data1){
+                        succ=data1[0]; //of no use for now
+                    });
+                }
              }
              else{
-                 score=2;
-                 setCookie('qid'+qidjs,'2&'+h+'&'+'1&0',1);
-                //set Wronged text as 2
-                //update scores visible above as 0
                 jQuery('#buttonsubmitcover').hide();
+                 score=2;
+                if(uidjs=='notknown')
+                    setCookie('qid'+qidjs,'2&'+h+'&'+'1&0',1);
+                   //set Wronged text as 2
+                   //update scores visible above as 0
+                else{
+                    var succ;
+                    var promise1 = ajaxcall('setquserdetails',uidjs,qidjs,-1,-1,'&w=2&h='+h+'&c=1&s=0');
+                    promise1.success(function(data1){
+                        succ=data1[0]; //of no use for now
+                    });
+                }
              }
         }
 
             
 
     });
-  }
-    
+  
+  
   
 };
 function skip(qidjs,uidjs){
