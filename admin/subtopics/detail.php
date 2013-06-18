@@ -16,6 +16,11 @@ $result = mysql_query($sql) or die('Cannot get Course. ' . mysql_error());
 
 $row = mysql_fetch_assoc($result);
 extract($row);
+$sql = "select name as tname from topics where topic_id =(select topic_id from topics_subtopics where subt_id = $detailsubTopicId)";
+$result = mysql_query($sql) or die('Cannot get Course. ' . mysql_error());
+
+$row = mysql_fetch_assoc($result);
+extract($row);
 ?>
 <p>&nbsp;</p>
 <form action="processsubTopics.php?action=modifysubTopic" method="post" enctype="multipart/form-data" name="frmmodifysubTopic" id="frmmodifysubTopic">
@@ -25,8 +30,8 @@ extract($row);
    <td class="content"> <?php echo $name; ?></td>
   </tr>
   <tr> 
-   <td width="150" class="label">Included in Topics</td>
-   <td class="content"><?php echo "baad mai" ?></td>
+   <td width="150" class="label">Included in Topic</td>
+   <td class="content"><?php echo $tname ?></td>
   </tr>
   <tr> 
    <td width="150" class="label">Content</td>

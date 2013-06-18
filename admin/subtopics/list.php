@@ -5,12 +5,14 @@ if (!defined('WEB_ROOT')) {
 
 // for paging
 // how many rows to show per page
-$rowsPerPage = 100;
+//$rowsPerPage = 100;
 
-$sql = "SELECT subt_id, name        FROM subtopics		ORDER BY name";
-$result     = dbQuery(getPagingQuery($sql, $rowsPerPage));
-$pagingLink = getPagingLink($sql, $rowsPerPage, '');
-
+$sql = "SELECT subtopics.subt_id, subtopics.name,topics.topic_id, topics.name as tname FROM subtopics 
+    left join topics_subtopics on topics_subtopics.subt_id=subtopics.subt_id 
+    left join topics on topics.topic_id=topics_subtopics.topic_id order by topics_subtopics.topic_id;";
+//$result     = dbQuery(getPagingQuery($sql, $rowsPerPage));
+//$pagingLink = getPagingLink($sql, $rowsPerPage, '');
+$result= dbQuery($sql);
 ?> 
 <p>&nbsp;</p>
 <form action="processsubTopics.php?action=addsubTopic" method="post"  name="frmListsubTopic" id="frmListsubTopic">
@@ -40,7 +42,7 @@ if (dbNumRows($result) > 0) {
 ?>
   <tr class="<?php echo $class; ?>"> 
    <td><a href="index.php?view=detail&subTopicId=<?php echo $subt_id; ?>"><?php echo $name; ?></a></td>
-   <td width="75" align="center"><a href="?c=<?php echo $cat_id."baadmaibanayenge"; ?>"><?php echo $cat_name; ?></a></td>
+   <td width="75" align="center"><a href="../topics/index.php?view=detail&TopicId=<?php echo $topic_id; ?>&TopicName=<?php echo $tname; ?>"><?php echo $tname; ?></a></td>
 <!--   <td width="70" align="center"><a href="javascript:modifyTopic(<?php //echo $pd_id; ?>);">Modify</a></td>-->
 <!--   <td width="70" align="center"><a href="javascript:deleteTopic(<?php //echo $pd_id; ?>, <?php //echo $catId; ?>);">Delete</a></td>-->
   </tr>

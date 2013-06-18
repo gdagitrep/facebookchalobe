@@ -12,16 +12,40 @@ function viewCourse()
 
 function checkAddSubtopicForm()
 {
-	with (window.document.frmmodifysubTopic) {
-//		if (univ_namesforcourse.selectedIndex == 0) {
-//			alert('Choose the Course category');
-//			cboCategory.focus();
-//			return;
-//		} else 
-                if (isEmpty(txtName, 'Enter Subtopic name')) {
+	with (window.document.frmAddsubTopic) {
+		if (jQuery('#checkArray :checkbox:checked').length <= 0) {
+			alert('Choose the Topic');
+			//Topicsforsubtopicmodify.focus();
 			return;
+//		} else 
+//                if (isEmpty(txtName, 'Enter Subtopic name')) {
+//			return;
 		} else {
 			submit();
+		}
+	}
+}
+function checkAddQuestionForm()
+{
+	with (window.document.frmAddquestion) {
+            if (jQuery('#aftersubtopic').val()==0) {
+                alert('Choose the SubTopic after which this question will appear');
+			return;
+		} else 
+                if (tinyMCE.get('txtquestiontext').getContent()=="") {
+                    alert('Write question text');
+                    return;
+		} else {
+                    if(jQuery('input[name=correctans]:radio:checked').val()=="0")
+                        {alert('Select the correct option');
+                    return}
+                    else{
+                        if(tinyMCE.get('txt'+(jQuery('input[name=correctans]:radio:checked').val())+'option').getContent()=="")
+                            alert('You forgot to mention the text in the correct options box');
+                        else
+                            submit();
+
+                    }
 		}
 	}
 }

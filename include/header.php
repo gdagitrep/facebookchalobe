@@ -4,7 +4,7 @@ if (!defined('WEB_ROOT')) {
 }
 
 // set the default page title
-$pageTitle = 'PLearning- Lets learn';
+$pageTitle = 'CourseLamp';
 
 // if a product id is set add the product name
 // to the page title but if the product id is not
@@ -58,7 +58,7 @@ function clearText(field)
 </script>
 <script type="text/javascript" src="scripts/jquery-1.10.0.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.animate-shadow-min.js"></script>
-<script type="text/javascript" src="scripts/shop_functions.js"></script>
+<script type="text/javascript" src="scripts/Courselamp_functions.js"></script>
 <script src="scripts/jquery.localscroll-1.2.7-min.js" type="text/javascript"></script>
 <script src="scripts/jquery.scrollTo-1.4.3.1-min.js" type="text/javascript"></script> 
 <!--<script type="text/javascript" src="scripts/jquery.scrollTo-1.4.3.1-min.js"></script>-->
@@ -68,23 +68,33 @@ function clearText(field)
 <script language="javascript" type="text/javascript" src="scripts/slideitmoo-1.1.js"></script>
 <script type="text/javascript" src="scripts/bsn.AutoSuggest_2.1.3.js"></script>
 <link rel="stylesheet" href="stylesheet/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" />
+-->
 <script language="javascript" type="text/javascript">
-	window.addEvents({
-		'domready': function(){
-			/* thumbnails example , div containers */
-			new SlideItMoo({
-						overallContainer: 'SlideItMoo_outer',
-						elementScrolled: 'SlideItMoo_inner',
-						thumbsContainer: 'SlideItMoo_items',		
-						itemsVisible: 5,
-						elemsSlide: 3,
-						duration: 200,
-						itemsSelector: '.SlideItMoo_element',
-						itemWidth: 140,
-						showControls:1});
-		}
-	});
-</script> -->
+//	window.addEvents({
+//		'domready': function(){
+//			/* thumbnails example , div containers */
+//			new SlideItMoo({
+//						overallContainer: 'SlideItMoo_outer',
+//						elementScrolled: 'SlideItMoo_inner',
+//						thumbsContainer: 'SlideItMoo_items',		
+//						itemsVisible: 5,
+//						elemsSlide: 3,
+//						duration: 200,
+//						itemsSelector: '.SlideItMoo_element',
+//						itemWidth: 140,
+//						showControls:1});
+//		}
+//	});
+//jQuery(window).load(function(){
+    jQuery(document).click(function(e) {
+        // check that your clicked
+        // element has no id=info
+    if( e.target.id != 'progress_dropdown') {
+      $("#progress_dropdown").hide();
+    }
+    });
+//    });
+</script> 
 </head>
 
 

@@ -10,23 +10,23 @@ $view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
 switch ($view) {
 	case 'list' :
 		$content 	= 'list.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - View Orders';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - View Orders';
 		break;
 
 	case 'detail' :
 		$content 	= 'detail.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - Order Detail';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - Order Detail';
 		break;
 
 	case 'modify' :
 		modifyStatus();
 		//$content 	= 'modify.php';		
-		//$pageTitle 	= 'PLearning Admin Control Panel - Modify Orders';
+		//$pageTitle 	= 'CourseLamp Admin Control Panel - Modify Orders';
 		break;
 
 	default :
 		$content 	= 'list.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - View Orders';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - View Orders';
 }
 
 

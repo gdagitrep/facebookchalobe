@@ -11,7 +11,7 @@ $self = WEB_ROOT . 'admin/index.php';
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link href="<?php echo WEB_ROOT;?>admin/include/admin.css" rel="stylesheet" type="text/css">
 <script language="JavaScript" type="text/javascript" src="<?php echo WEB_ROOT;?>../scripts/common.js"></script>
-<script type="text/javascript" src="../../scripts/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../scripts/jquery-1.10.0.min.js"></script>
 <?php
 $n = count($script);
 for ($i = 0; $i < $n; $i++) {
@@ -22,19 +22,6 @@ for ($i = 0; $i < $n; $i++) {
 ?>
 <script type="text/javascript" src="<?php echo WEB_ROOT;?>admin/library/js/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript">
-
-//tinymce.init({
-//    selector: "textarea",
-//    theme: "modern",
-//    plugins: [
-//        "equation advlist autolink lists link image charmap print preview hr anchor pagebreak",
-//        "searchreplace wordcount visualblocks visualchars code fullscreen",
-//        "insertdatetime media nonbreaking save table contextmenu directionality",
-//        "emoticons template paste "
-//    ],
-//    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-//    toolbar2: "print preview media | forecolor backcolor emoticons |equation",
-//    image_advtab: true
 tinyMCE.init({
         mode : "textareas",
         theme : "advanced",
@@ -69,26 +56,22 @@ tinyMCE.init({
                 staffid : "991234"
         }
 
-        
-
 });
 </script>
 
 </head>
 <body>
 <table width="auto" border="0" align="center" cellpadding="0" cellspacing="1" class="graybox">
-<!--  <tr>
-    <td colspan="2"><img src="<?php //echo WEB_ROOT; ?>admin/include/banner-top.gif" width="750" height="75"></td>
-  </tr>-->
   <tr>
     <td width="150" valign="top" class="navArea"><p>&nbsp;</p>
-        <a href="<?php echo WEB_ROOT; ?>" class="leftnav">User Site</a> 
-      <a href="<?php echo WEB_ROOT; ?>admin/" class="leftnav">Home</a> 
+          <a href="<?php echo WEB_ROOT; ?>" class="leftnav">User Site</a> 
+          <a href="<?php echo WEB_ROOT; ?>admin/" class="leftnav">Home</a> 
 	  <a href="<?php echo WEB_ROOT; ?>admin/universities/" class="leftnav">Universities</a>
 	  <a href="<?php echo WEB_ROOT; ?>admin/courses/" class="leftnav">Courses</a> 
 	  <a href="<?php echo WEB_ROOT; ?>admin/topics" class="leftnav">Topics</a> 
           <a href="<?php echo WEB_ROOT; ?>admin/subtopics" class="leftnav">SubTopics/Content</a> 
-	  <a href="<?php echo WEB_ROOT; ?>admin/config/" class="leftnav">PLearning Config</a> 
+          <a href="<?php echo WEB_ROOT; ?>admin/topics" class="leftnav" title="To add/modify questions, select topic">Questions</a> 
+	  <a href="<?php echo WEB_ROOT; ?>admin/config/" class="leftnav">CourseLamp Config</a> 
 	  <a href="<?php echo WEB_ROOT; ?>admin/user/" class="leftnav">User</a> 
 	  <a href="<?php echo $self; ?>?logout" class="leftnav">Logout</a>
       <p>&nbsp;</p>
@@ -107,6 +90,6 @@ require_once $content;
   </tr>
 </table>
 <p>&nbsp;</p>
-<p align="center">Copyright &copy;<!-- 2013 - --> <?php echo date('Y'); ?> <a href="http://www.plearning.com"> Plearning- Passionate Learning</a></p>
+<p align="center">Copyright &copy;<!-- 2013 - --> <?php echo date('Y'); ?> <a href="http://www.CourseLamp.com"> CourseLamp- Learn under a lamp</a></p>
 </body>
 </html>

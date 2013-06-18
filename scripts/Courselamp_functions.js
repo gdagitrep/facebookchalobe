@@ -1,4 +1,10 @@
-(function($){jQuery(document).ready(function(){
+jQuery.fn.toggleinline = function () {
+    if(this.css('display')=="none")
+        return this.css('display', 'inline-block');
+    else
+        return this.css('display', 'none');
+};
+jQuery(document).ready(function(){
     
 //leftNav
     $list_css={
@@ -22,7 +28,7 @@
     jQuery(".popout_all-subuni").hide();
     jQuery(".popout_all-click").hide();
 
-    var tablist=".Courses-tab ,.Universities-tab ,  .Sub-Univ-tab, .Manga-tab, .Kitchen-tab";
+    var tablist=".Courses-tab ,.Universities-tab ,  .Sub-Univ-tab";
     jQuery(tablist).css($tab_css);
     jQuery(".Courses-tab").hover(function(){
         jQuery(".popout_all", this).show();
@@ -60,9 +66,14 @@
     jQuery("#cart_button").click(function(e){
         e.stopPropagation();
         e.preventDefault();
-        jQuery("#progress_dropdown").toggle();
+        jQuery("#progress_dropdown").toggleinline();
     });
-    
+    jQuery("#bla").click(function(e){
+        e.stopPropagation();
+        e.preventDefault();
+        jQuery("#sidebar").toggle();
+        jQuery("#chalopub2").toggle();
+    });
     jQuery('#lgoutbox').hide();
     var up=1;
     jQuery('body').click(function(event) {
@@ -82,15 +93,15 @@
         event2.stopPropagation();
         }
     });
-    jQuery(window).scroll(function() {
-        $el = $('#topbarfancy');
-        if ($(this).scrollTop() > 80 && $el.css('position') !== 'fixed'){ 
-            $el.css({'position': 'fixed', 'top': '0px','margin-top':'0px'});
-        }
-        if ($(this).scrollTop() < 80 && $el.css('position') === 'fixed'){ 
-            $el.css({'position': 'absolute','margin-top':'80px'});
-        }
-    });
+//    jQuery(window).scroll(function() {
+//        $el = $('#topbarfancy');
+//        if ($(this).scrollTop() > 80 && $el.css('position') !== 'fixed'){ 
+//            $el.css({'position': 'fixed', 'top': '0px','margin-top':'0px'});
+//        }
+//        if ($(this).scrollTop() < 80 && $el.css('position') === 'fixed'){ 
+//            $el.css({'position': 'absolute','margin-top':'80px'});
+//        }
+//    });
 
     ///    tabbed interface
     jQuery("#tabs li:first").attr("id","current"); // Activate first tab
@@ -107,15 +118,15 @@
     });
     //tabbed interface ends
     
-      //jQuery('#nav').localScroll({duration:800});
-      jQuery('#tutt').localScroll({duration:800,lazy:true});
-      
-        
-        
-
-
+    //jQuery('#nav').localScroll({duration:800});
+    jQuery('#tutt').localScroll({duration:800,lazy:true});
+    
+    
 });
-})(jQuery);
+
+
+    
+
 function ajaxcall(action,uid,qid,n, sel,whcs) // n for question no starting from 1
   {
     //-----------------------------------------------------------------------
@@ -292,15 +303,9 @@ function submitanswer(qidjs,uidjs,n,nq){
                         succ=data1[0]; //of no use for now
                     });
                 }
-             }
+            }
         }
-
-            
-
     });
-  
-  
-  
 };
 function skip(qidjs,uidjs){
     if(uidjs=='notknown'){

@@ -11,18 +11,18 @@ if (isset($_POST['txtnormalUserName'])) {
 ?>
 <html>
 <head>
-<title>Shop User - Login/Register</title>
+<title>CourseSpree - Login/Register</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link href="stylesheet/userlogin.css" rel="stylesheet" type="text/css">
 <link href="stylesheet/demo.css" rel="stylesheet" type="text/css">
 </head>
-<body style="background: url(images/abc.png) repeat-x">
+<body >
     <div id="templatemo_header_bar">
             
             <div id="header"><div class="right"></div>
             
                 <h1><a href="index.php">
-                        <img src="images/templatemo_logo.png" alt="Site Title" height="42px"/>
+                        <img src="images/abc.png" alt="Site Title" height="42px"/>
                     <span>Learn with Passion</span>
                 </a></h1>
             </div>
@@ -41,6 +41,15 @@ if (isset($_POST['txtnormalUserName'])) {
            <tr align="center"> 
             <td colspan="3">&nbsp;</td>
            </tr>
+            <tr> 
+               <td colspan="2" align="right">Admin Access</td>
+            <td><div id="admin_box" >
+                <div class="buttons" >
+                <a href="../admin/index.php" class="button">Admin</a>
+                </div> 
+                </div>
+            </td>
+            </tr>
            <tr> 
                <td colspan="2" align="right">Not registered yet?</td>
             <td><div class="buttons"><a href="../user_register.php" class="button">Register</a></div></td>

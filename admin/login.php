@@ -15,7 +15,7 @@ if (isset($_POST['txtUserName'])) {
 ?>
 <html>
 <head>
-<title>PLearning Admin - Login Phase 2</title>
+<title>CourseLamp Admin - Login Phase 2</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link href="include/admin.css" rel="stylesheet" type="text/css">
 </head>

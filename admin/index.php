@@ -6,7 +6,7 @@ checkUser();
 
 $content = 'main.php';
 
-$pageTitle = 'PLearning Admin';
+$pageTitle = 'CourseLamp Admin';
 $script = array();
 
 require_once 'include/template.php';

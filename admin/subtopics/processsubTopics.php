@@ -45,7 +45,7 @@ function addsubTopic()
         $result= dbQuery($sql) or die(mysql_error());
         $row= dbFetchAssoc($result);
         $subTopicid= $row['s'];
-        $subTopicid= $subTopicid +1;
+        $subTopicid += 1;
 	$sql   = "INSERT INTO subtopics (subt_id, `name`,content) VALUES ('$subTopicid', '$name','$cont')";
 	$result = dbQuery($sql) or die(mysql_error());
         
@@ -60,7 +60,7 @@ function addsubTopic()
         }
         header("Location: index.php");
         }
-	else {header("Location: index.php/tuttii");}
+	else {header("Location: index.php/?view=detail&subTopicId=".$subTopicid);}
 }
 
 /*
@@ -74,9 +74,8 @@ function modifysubTopic()
     $sql   = "UPDATE subtopics SET name = '$name', content = '$content', date_updated = NOW()
 			  WHERE subt_id = $subTopicId";  
 
-	$result = dbQuery($sql) or die('Cannt'.mysql_error());
-	
-	header('Location: index.php?view=detail&subTopicId=\'$subTopicId\'');
+    $result = dbQuery($sql) or die('Cannt'.mysql_error());
+	header('Location: index.php?view=detail&subTopicId='.$subTopicId);
 }
 
 /*

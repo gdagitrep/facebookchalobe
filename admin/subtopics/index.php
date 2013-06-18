@@ -10,27 +10,27 @@ $view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
 switch ($view) {
 	case 'list' :
 		$content 	= 'list.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - View Topic';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - View Topic';
 		break;
 
 	case 'add' :
 		$content 	= 'add.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - Add Topic';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - Add Topic';
 		break;
 
 	case 'modify' :
 		$content 	= 'modify.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - Modify Topic';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - Modify Topic';
 		break;
 
 	case 'detail' :
 		$content    = 'detail.php';
-		$pageTitle  = 'PLearning Admin Control Panel - View Topic Detail';
+		$pageTitle  = 'CourseLamp Admin Control Panel - View Topic Detail';
 		break;
 		
 	default :
 		$content 	= 'list.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - View Topic';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - View Topic';
 }
 
 $script    = array('Content.js');

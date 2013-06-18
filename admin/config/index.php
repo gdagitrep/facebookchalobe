@@ -9,7 +9,7 @@ $view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
 switch ($view) {
 	default :
 		$content 	= 'main.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - PLearning Configuration';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - CourseLamp Configuration';
 }
 
 //$script    = array('xyz.js');

@@ -1,5 +1,6 @@
+
 <?php
-$subtopicid= $_GET['st'];
+
 $sql= "select `name` as namee,content from subtopics where subt_id='$subtopicid';";
 $result=  dbQuery($sql) or die('Cannot get Subtopic. ' . mysql_error())    ;
 extract(dbFetchAssoc($result));
@@ -7,6 +8,7 @@ $sql1= "select Q_id as quinto from questions where subt_id='$subtopicid';";
 $result1=  dbQuery($sql1) or die('Cannot get questions. ' . mysql_error())    ;
 ?>
 <div class="coursecontent">
+<div class="contentpadding">
     <div class="contentheading"><?php echo $namee;?> </div>
     <br/>
     <div class="content">
@@ -80,4 +82,5 @@ $result1=  dbQuery($sql1) or die('Cannot get questions. ' . mysql_error())    ;
     </div>
     <?php        
     } ?>
+</div>
 </div>

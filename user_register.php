@@ -11,7 +11,7 @@ if (isset($_POST['txtnormalUserNamereg'])) {
 ?>
 <html>
 <head>
-<title>Shop User - Register</title>
+<title>CourseLamp User - Register</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link href="stylesheet/userlogin.css" rel="stylesheet" type="text/css">
 <link href="stylesheet/demo.css" rel="stylesheet" type="text/css">

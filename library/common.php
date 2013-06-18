@@ -1,7 +1,7 @@
 <?php
 /*
 	Contain the common functions 
-	required in shop and admin pages
+	required in site and admin pages
 */
 if($admin8723nh89h3289h2939h9h== 1){
 require_once 'config_admin.php';}

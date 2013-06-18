@@ -29,7 +29,7 @@ function addquestion(){
 	header('Location: index.php');
 }
     $questiontext=$_POST['txtquestiontext'];
-    $qtype= $_POST['qtype'];
+    $qtype= 'O';//$_POST['qtype'];
     $aftersubtopic= $_POST['aftersubtopic'];
     $result= dbFetchAssoc(dbQuery("select max(Q_id) as s from questions"));
     $qid= $result['s']+1;
@@ -69,7 +69,7 @@ function editquestion(){
 	header('Location: index.php');
 }
     $newquestiontext=$_POST['txtquestiontext'];
-    $newqtype= $_POST['qtype'];
+    $newqtype= 'O';//$_POST['qtype'];
     $newaftersubtopic= $_POST['aftersubtopic'];
     
     if($newqtype== 'O'){

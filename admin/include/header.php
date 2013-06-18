@@ -27,7 +27,7 @@ for ($i = 0; $i < $n; $i++) {
   <td width="20%" class="nav"><a href="<?php echo WEB_ROOT;?>admin/category/index.php" class="nav">CATEGORY</a></td>
   <td width="20%" class="nav"><a href="<?php echo WEB_ROOT;?>admin/product/index.php" class="nav">PRODUCT</a></td>
   <td width="20%" class="nav"><a href="<?php echo WEB_ROOT;?>admin/orders/index.php" class="nav">ORDERS</a></td>
-  <td width="20%" class="nav"><a href="<?php echo WEB_ROOT;?>admin/shop/index.php" class="nav">CONFIG</a></td>  
+  <td width="20%" class="nav"><a href="<?php echo WEB_ROOT;?>admin/config/index.php" class="nav">CONFIG</a></td>  
  </tr>
 </table>
 <p>&nbsp;</p>

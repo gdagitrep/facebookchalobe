@@ -60,11 +60,12 @@ while($row = dbFetchAssoc($result)) {
   </tr>
   <tr><td>Question type</td>
       <td>
-          <input name="qtype" type="radio" value="O" onclick="jQuery(objective())" <?php if($type=='O') echo "checked";?>/>Objective<br>
-          <input name="qtype" type="radio" value="S" onclick="jQuery(subjective())" <?php if($type=='S') echo "checked";?>/>Subjective
+          Objective (only this type is enabled for now)
+<!--          <input name="qtype" type="radio" value="O" onclick="jQuery(objective())" <?php if($type=='O') echo "checked";?>/>Objective<br>
+          <input name="qtype" type="radio" value="S" onclick="jQuery(subjective())" <?php if($type=='S') echo "checked";?>/>Subjective-->
       </td>
   </tr>
-  <tr id="objquestions" class="label" <?php if($type=='S') {?> style="display: none"<?php }?>>
+  <tr id="objquestions" class="label" <?php //if($type=='S') {?> <?php //}?>>
       <td colspan="2">
           <input name="correctans" type="radio" value="A"<?php if($answer=='A') echo "checked"?>/><b style="font-size: 18">A</b> <textarea name="txtAoption"><?php if($type=='O') echo $A;?></textarea><br><br><br>
           <input name="correctans" type="radio" value="B"<?php if($answer=='B') echo "checked"?>/><b style="font-size: 18">B</b> <textarea name="txtBoption"><?php if($type=='O') echo $B;?></textarea><br><br><br>
@@ -75,12 +76,12 @@ while($row = dbFetchAssoc($result)) {
 
   
   </tr>
-  <tr id="subquestions" class="label" <?php if($type=='O') {?>style="display: none"<?php }?>>
+  <tr id="subquestions" class="label" <?php //if($type=='O') {?>style="display: none"<?php// }?>>
       <td>Answer</td><td><textarea name="correctansS"><?php if($type=='S') echo $answer;?></textarea></td>
   </tr>
  </table>
  <p align="center"> 
-  <input name="btneditquestion" type="button" id="btneditquestion" value="Save question" onClick="submit();//checkAddTopicForm();" class="box">
+  <input name="btneditquestion" type="button" id="btneditquestion" value="Save question" onClick="checkAddQuestionForm();" class="box">
   &nbsp;&nbsp;<input name="btnCancel" type="button" id="btnCancel" value="Cancel" onClick="window.location.href='index.php';" class="box">  
  </p>
 </form>

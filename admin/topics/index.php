@@ -10,42 +10,43 @@ $view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
 switch ($view) {
 	case 'list' :
 		$content 	= 'list.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - View Topic';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - View Topic';
 		break;
 
 	case 'add' :
 		$content 	= 'add.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - Add Topic';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - Add Topic';
 		break;
         case 'addquestion' :
 		$content 	= 'addquestion.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - Add Question';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - Add Question';
 		break;
             case 'viewquestion' :
 		$content 	= 'viewquestion.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - View Questions';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - View Questions';
 		break;
             case 'editquestion' :
 		$content 	= 'editquestion.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - Edit Questions';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - Edit Questions';
 		break;
 
 	case 'modify' :
 		$content 	= 'modify.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - Modify Topic';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - Modify Topic';
 		break;
 
 	case 'detail' :
 		$content    = 'detail.php';
-		$pageTitle  = 'PLearning Admin Control Panel - View Topic Detail';
+		$pageTitle  = 'CourseLamp Admin Control Panel - View Topic Detail';
 		break;
 		
 	default :
 		$content 	= 'list.php';		
-		$pageTitle 	= 'PLearning Admin Control Panel - View Topic';
+		$pageTitle 	= 'CourseLamp Admin Control Panel - View Topic';
 }
 
-$script    = array('CourseTopic.js');
+$script    = array('CourseTopic.js','Content.js');
+
 
 require_once '../include/template.php';
 ?>
