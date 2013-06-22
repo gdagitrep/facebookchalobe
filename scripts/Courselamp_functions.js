@@ -5,7 +5,8 @@ jQuery.fn.toggleinline = function () {
         return this.css('display', 'none');
 };
 jQuery(document).ready(function(){
-    
+    var wrapperminH=jQuery(window).height()-42;
+    jQuery('#wrapper').css('min-height',wrapperminH);
 //leftNav
     $list_css={
 	"color": "#201f1c","padding-left": "20px",
@@ -212,12 +213,7 @@ function getquestion(uidjs,qidjs,n,nq){ // n is the number (starting from 1) of 
                 jQuery('#buttonsubmitcover').hide();
           }
           
-          
-          
-//          if(qsolved==1)
-//              correctans(n,nq);
-//          else
-//              wronganswer(n,nq);
+         
       }
       else
           refreshquestionnaire(n,nq);
@@ -262,6 +258,7 @@ function submitanswer(qidjs,uidjs,n,nq){
         }
         if(ajaxcorans != 0){
             correctans(n,nq);
+            jQuery('#msg').html('<span style="color: green">Success!!!</span>');
             if(uidjs=='notknown')
                 setCookie('qid'+qidjs,w+'&'+h+'&'+'1&'+s,1); //w&h&c&s
             else{
@@ -343,7 +340,7 @@ function correctans(n,nq){ // set buttons in case answer is correct
     jQuery('#buttonhint').addClass('greenbutton');
     jQuery('#buttonnext').addClass('greenbutton');
     jQuery('#buttonnext').text('Correct! Next question');
-    //jQuery('#msg').html('<span style="color: green">Success!!!</span>');
+    
     jQuery('#buttonsubmitcover').hide();
     if(n<nq)
         jQuery('#buttonnextcover').show();

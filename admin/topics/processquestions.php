@@ -31,6 +31,8 @@ function addquestion(){
     $questiontext=$_POST['txtquestiontext'];
     $qtype= 'O';//$_POST['qtype'];
     $aftersubtopic= $_POST['aftersubtopic'];
+    $hint = $_POST['txthint'];
+    $explanation= $_POST['txtexp'];
     $result= dbFetchAssoc(dbQuery("select max(Q_id) as s from questions"));
     $qid= $result['s']+1;
     if($qtype== 'O'){
@@ -39,8 +41,8 @@ function addquestion(){
     if($qtype == 'S'){
         $ans= $_POST['correctansS'];
     }
-    $result=  dbQuery("insert into questions (Q_id, subt_id,questiontext, type, answer) 
-            values('$qid','$aftersubtopic','$questiontext','$qtype','$ans') ")
+    $result=  dbQuery("insert into questions (Q_id, subt_id,questiontext, type, answer, hint, solution) 
+            values('$qid','$aftersubtopic','$questiontext','$qtype','$ans','$hint','$explanation') ")
          or die(mysql_error()) ;
     
     if($qtype== 'O'){
@@ -71,6 +73,8 @@ function editquestion(){
     $newquestiontext=$_POST['txtquestiontext'];
     $newqtype= 'O';//$_POST['qtype'];
     $newaftersubtopic= $_POST['aftersubtopic'];
+    $newhint = $_POST['txthint'];
+    $newexplanation= $_POST['txtexp'];
     
     if($newqtype== 'O'){
         $ans= $_POST['correctans'];
@@ -79,7 +83,7 @@ function editquestion(){
         $ans= $_POST['correctansS'];
     }
     $result=  dbQuery("update questions set subt_id='$newaftersubtopic',questiontext='$newquestiontext' , 
-            type = '$newqtype', answer = '$ans' where Q_id= '$qid' ;") or die("1 error".mysql_error()) ;
+            type = '$newqtype', answer = '$ans', hint='$newhint', solution='$newexplanation' where Q_id= '$qid' ;") or die("question editing error".mysql_error()) ;
     
     if($newqtype== 'O'){
         $txtAoption= $_POST['txtAoption'];
@@ -88,8 +92,8 @@ function editquestion(){
         $txtDoption= $_POST['txtDoption'];
         $txtEoption= $_POST['txtEoption'];
         if($prevqtype=='O')
-            $result=  dbQuery("update answer_objective set A='$txtAoption',B= '$txtAoption',C='$txtAoption',
-                    D='$txtAoption',E='$txtAoption' where Q_id='$qid';") or die("2 error".mysql_error()) ;
+            $result=  dbQuery("update answer_objective set A='$txtAoption',B= '$txtBoption',C='$txtCoption',
+                    D='$txtDoption',E='$txtEoption' where Q_id='$qid';") or die("2 error".mysql_error()) ;
         else
             $result=  dbQuery("insert into answer_objective(Q_id, A,B,C,D,E)
             values ($qid, '$txtAoption','$txtBoption','$txtCoption','$txtDoption','$txtEoption')") or die("3 error".mysql_error()) ;

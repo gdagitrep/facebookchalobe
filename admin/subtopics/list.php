@@ -9,7 +9,7 @@ if (!defined('WEB_ROOT')) {
 
 $sql = "SELECT subtopics.subt_id, subtopics.name,topics.topic_id, topics.name as tname FROM subtopics 
     left join topics_subtopics on topics_subtopics.subt_id=subtopics.subt_id 
-    left join topics on topics.topic_id=topics_subtopics.topic_id order by topics_subtopics.topic_id;";
+    left join topics on topics.topic_id=topics_subtopics.topic_id order by topics_subtopics.topic_id,subtopics.subt_id;";
 //$result     = dbQuery(getPagingQuery($sql, $rowsPerPage));
 //$pagingLink = getPagingLink($sql, $rowsPerPage, '');
 $result= dbQuery($sql);

@@ -24,6 +24,21 @@ function checkAddCourseForm()
 		}
 	}
 }
+function checkAddTopicForm()
+{
+	with (window.document.frmAddTopic) {
+		if (jQuery('#checkArray :checkbox:checked').length <= 0) {
+			alert('Choose the Course');
+			return;
+		} else {
+                    if(jQuery('#txtName').val()==""){
+                        alert('Write Topic name in box');
+                        return;
+                    }
+			submit();
+		}
+	}
+}
 
 function addCourse()
 {

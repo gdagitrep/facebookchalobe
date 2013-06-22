@@ -11,13 +11,15 @@ $sql = "SELECT course_id, name FROM courses ORDER BY course_id";
   <tr><td colspan="2" id="entryTableHeader">Add Topic</td></tr>
   <tr> 
    <td width="150" class="label">Included in Courses</td>
-   <td class="content"> 
+   <td class="content">
+       <fieldset id="checkArray">
        <?php while( $row1=  dbFetchAssoc($coursesList)) {
            extract($row1 );?>
        <input type="checkbox" name="coursesforTopic[]" 
               value="<?php echo $course_id;
               ?>" /><?php echo $name;?><br>
 	<?php } ?>
+       </fieldset>
     </td>
   </tr>
   <tr> 
@@ -27,7 +29,7 @@ $sql = "SELECT course_id, name FROM courses ORDER BY course_id";
   
  </table>
  <p align="center"> 
-  <input name="btnAddTopic" type="button" id="btnAddTopic" value="Add Topic" onClick="submit();//checkAddTopicForm();" class="box">
+     <input name="btnAddTopic" type="button" id="btnAddTopic" value="Add Topic" onClick="checkAddTopicForm();" class="box">
   &nbsp;&nbsp;<input name="btnCancel" type="button" id="btnCancel" value="Cancel" onClick="window.location.href='index.php';" class="box">  
  </p>
 </form>

@@ -11,7 +11,7 @@ if (isset($_GET['TopicId']) && $_GET['TopicId'] > 0) {
 	header('Location: index.php');
 }
 
-$sql = "SELECT subt_id, questiontext, type,answer from questions where Q_id ='$qQ_id';";
+$sql = "SELECT subt_id, questiontext, type,answer,hint,solution  from questions where Q_id ='$qQ_id';";
 $result=  dbQuery($sql) or die('Cannot get Courses. ' . mysql_error());
 $row= dbFetchAssoc($result);
 extract($row);
@@ -78,6 +78,14 @@ while($row = dbFetchAssoc($result)) {
   </tr>
   <tr id="subquestions" class="label" <?php //if($type=='O') {?>style="display: none"<?php// }?>>
       <td>Answer</td><td><textarea name="correctansS"><?php if($type=='S') echo $answer;?></textarea></td>
+  </tr>
+  <tr>
+      <td>Hint</td>
+      <td><textarea name="txthint"><?php echo $hint;?></textarea></td>
+  </tr>
+  <tr>
+      <td>Explanation</td>
+      <td><textarea name="txtexp"><?php echo $solution;?></textarea></td>
   </tr>
  </table>
  <p align="center"> 

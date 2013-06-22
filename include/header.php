@@ -41,6 +41,7 @@ $pageTitle = 'CourseLamp';
 <title><?php echo $pageTitle; ?></title>
 <meta name="keywords" content="online courses, engineering courses, indian colleges" />
 <meta name="description" content="Online study material for various college/university courses. Questions for assessment" />
+<link href='/images/sparta.png'  rel="shortcut icon"/>
 <!--<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500&subset=latin,greek' rel='stylesheet' type='text/css'></link>-->
 <link href="stylesheet/templatemo_style.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="stylesheet/styles.css" />
@@ -95,6 +96,12 @@ function clearText(field)
     });
 //    });
 </script> 
+<script type="text/javascript" src="admin/library/js/tinymce/jscripts/tiny_mce/plugins/asciimath/js/ASCIIMathMLwFallback.js"></script>
+<script type="text/javascript" src="admin/library/js/tinymce/jscripts/tiny_mce/plugins/asciisvg/js/ASCIIsvg.js"></script>
+<script type="text/javascript">
+// var AScgiloc = 'http://www.imathas.com/imathas/filter/graph/svgimg.php';
+ var AMTcgiloc = "http://www.imathas.com/cgi-bin/mimetex.cgi";
+</script>
 </head>
 
 

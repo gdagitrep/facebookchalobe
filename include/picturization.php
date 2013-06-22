@@ -17,10 +17,15 @@ $sql = "select topics.topic_id as topic_d, topics.name as topicc from courses_to
 $result0 = dbQuery($sql);
 while ($row = dbFetchAssoc($result0)) {
     extract($row);
+    $sql= "select min(subt_id) as minsubt_id from topics_subtopics where topic_id=$topic_d";
+    $result1=  dbQuery($sql)    ;
+    $row1=  dbFetchAssoc($result1);
+    extract($row1);
+    $surl="index.php?&c=".$course."&su=".$subuniversity."&st=".$minsubt_id;
     ?>
 <li class="picturization_block">
     
-    <a href="<?php echo '../logout.php'; ?>">
+    <a href="<?php echo $surl; ?>">
         <div style="font-family: cursive; font-size: 18px"><?php echo  $topicc; ?></div>
         
     </a>

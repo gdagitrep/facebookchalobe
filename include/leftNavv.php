@@ -6,13 +6,21 @@ $sql = "select topics.topic_id as topic_d, topics.name as topicc from courses_to
 $result0 = dbQuery($sql);
 while ($row = dbFetchAssoc($result0)) {
     extract($row);
-    ?>
-    <a class="topics"  <?php echo "href=\"$url\""?>><font size="1.5" face="verdana">
-        <span class="oneline"><?php echo  $topicc; ?></span></font></a>
-    <?php
-$sql= "select name,subtopics.subt_id from topics_subtopics left join subtopics on 
+    $sql= "select name,subtopics.subt_id from topics_subtopics left join subtopics on 
     topics_subtopics.subt_id= subtopics.subt_id where topics_subtopics.topic_id= $topic_d";
-$result1=  dbQuery($sql)    ;
+    $result1=  dbQuery($sql)    ;
+    $row1=  dbFetchAssoc($result1);
+    extract($row1);
+    $surl="index.php?&c=".$course."&su=".$subuniversity."&st=".$subt_id;
+    
+    ?>
+    <a class="topics"  <?php echo "href=\"$surl\""?>><font size="1.5" face="verdana">
+        <span class="oneline"><?php echo  $topicc; ?></span></font></a>
+    <a class="subtopics" title="<?php echo $name?>" <?php echo "href=\"$surl\""?>><span class="oneline">
+        <font size="1.5" face="verdana" >
+            <?php echo  $name; ?></font></span></a>
+            <?php
+
 while($row1=  dbFetchAssoc($result1)){
     extract($row1);
     $surl="index.php?&c=".$course."&su=".$subuniversity."&st=".$subt_id;

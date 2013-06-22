@@ -10,7 +10,7 @@ if (isset($_GET['TopicId']) && $_GET['TopicId'] > 0) {
 	header('Location: index.php');
 }
 
-$sql = "SELECT Q_id,questiontext,`type`,subt_id,answer   FROM questions where subt_id IN (SELECT topics_subtopics.subt_id from 
+$sql = "SELECT Q_id,questiontext,`type`,subt_id,answer,hint,solution   FROM questions where subt_id IN (SELECT topics_subtopics.subt_id from 
 topics_subtopics where topic_id= '$qTopicid'); ";
 $questionList = dbQuery($sql) or die('Cannot get Courses. ' . mysql_error());
 ?>
@@ -66,6 +66,15 @@ while($row = dbFetchAssoc($questionList)){
   <tr id="subquestions" class="label">
       <td>Answer</td><td><?php echo $answer;?></td>
   </tr>
+  <tr class="label" >
+      <td> Hint </td>
+      <td class="content"><?php echo $hint;?></td>
+  </tr>
+  <tr class="label" >
+      <td> Explanation </td>
+      <td><?php echo $solution;?></td>
+  </tr>
+  
     <tr>
 <!-- <p align="center"> -->
       <td colspan="2">

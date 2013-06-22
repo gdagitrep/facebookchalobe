@@ -54,10 +54,9 @@ function addTopic()
     foreach ($hey as $row) {
         $sql = "Insert into courses_topics (course_id, topic_id )values ('$row', '$Tid')";
         $result = dbQuery($sql) or die(mysql_error());
+        }
     }
     header("Location: index.php");
-    }
-    else {header("Location: index.php/oot");}
 }
 
 function modifyTopic()

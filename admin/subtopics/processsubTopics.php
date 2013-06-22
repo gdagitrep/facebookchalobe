@@ -41,7 +41,7 @@ function addsubTopic()
         $name        = $_POST['txtName'];
         $cont = $_POST['txtcontent'];
         
-        $sql="SELECT max(subt_id) as s from subtopics nolock";
+        $sql="SELECT max(subt_id) as s from subtopics";
         $result= dbQuery($sql) or die(mysql_error());
         $row= dbFetchAssoc($result);
         $subTopicid= $row['s'];

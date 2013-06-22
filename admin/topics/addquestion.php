@@ -73,6 +73,14 @@ while($row = dbFetchAssoc($result)) {
   <tr id="subquestions" class="label" style="display: none">
       <td>Answer</td><td><textarea name="correctansS"></textarea></td>
   </tr>
+  <tr>
+      <td>Hint</td>
+      <td><textarea name="txthint"></textarea></td>
+  </tr>
+  <tr>
+      <td>Explanation</td>
+      <td><textarea name="txtexp"></textarea></td>
+  </tr>
  </table>
  <p align="center"> 
   <input name="btnAddquestion" type="button" id="btnAddquestion" value="Save question" onClick="checkAddQuestionForm();" class="box">

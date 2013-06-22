@@ -23,7 +23,7 @@ or die('Cannot get Topics. ' . mysql_error());
  <p align="center" class="formTitle">Modify Subtopic</p>
  <table width="100%" border="0" align="center" cellpadding="5" cellspacing="1" class="entryTable">
   <tr> 
-   <td width="150" class="label">Included in Topics </td>
+   <td width="150" class="label">Included in Topics (Can't be changed as of now) </td>
    <td class="content">
        <fieldset id="checkArray">
        <?php while( $row1=  dbFetchAssoc($topicsList)) {
@@ -46,7 +46,7 @@ or die('Cannot get Topics. ' . mysql_error());
     
  </table>
  <p align="center"> 
-  <input name="btnModifyCourse" type="button" id="btnModifyCourse" value="Save changes" onClick="checkAddSubtopicForm();" class="box">
+  <input name="btnModifyCourse" type="button" id="btnModifyCourse" value="Save changes" onClick="submit();" class="box">
   &nbsp;&nbsp;<input name="btnCancel" type="button" id="btnCancel" value="Cancel" onClick="window.location.href='index.php';" class="box">  
  </p>
 </form>

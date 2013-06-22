@@ -37,8 +37,8 @@ function hidesidebar(){
 
 </div>-->
 <div id="topbarfancy">
-    <a  style="display: inline-block; margin-left: 40px;width: 200px;height: 42px" href="/index.php" >
-        <img src="../images/capua2.png" style="height: 42px;"/>
+    <a  style="display: inline-block; margin-left: 40px;width: 224px;height: 42px" href="/index.php" >
+        <img src="../images/capua_new.png" style="height: 42px;"/>
     </a>
 <div id="sidebarplusallcat" style="display: inline-block"
      
