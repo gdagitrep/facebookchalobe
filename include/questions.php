@@ -20,7 +20,7 @@ if($action=='getq'){
         $sql= "select A,B,C,D,E from answer_objective where Q_id='$Q_id';";
         $result2= dbQuery($sql) or die('Cannot get options. ' . mysql_error());
         extract(mysql_fetch_assoc($result2));
-        $ret[0]=$ret[0]."<tr><td>   </td><td> <input type=\"radio\" value=\"A\" name= \"corans\" onchange=\"changegr();\" /></td><td><b>".$A."</b></td></tr>";
+        $ret[0]=$ret[0]."<tr><td>   </td><td> <input type=\"radio\" value=\"A\" name= \"corans\" onchange=\"changegr();\" /></td><td>".$A."</td></tr>";
         $ret[0]=$ret[0]."<tr><td>   </td><td> <input type=\"radio\" value=\"B\" name= \"corans\" onchange=\"changegr();\" /></td><td>".$B."</td></tr>";
         $ret[0]=$ret[0]."<tr><td>   </td><td> <input type=\"radio\" value=\"C\" name= \"corans\" onchange=\"changegr();\" /></td><td>".$C."</td></tr>";
         $ret[0]=$ret[0]."<tr><td>   </td><td> <input type=\"radio\" value=\"D\" name= \"corans\" onchange=\"changegr();\" /></td><td>".$D."</td></tr>";

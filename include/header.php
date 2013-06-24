@@ -2,38 +2,10 @@
 if (!defined('WEB_ROOT')) {
 	exit;
 }
-
-// set the default page title
 $pageTitle = 'CourseLamp';
-
-// if a product id is set add the product name
-// to the page title but if the product id is not
-// present check if a category id exist in the query string
-// and add the category name to the page title
-//if (isset($_GET['p']) && (int)$_GET['p'] > 0) {
-//	$pdId = (int)$_GET['p'];
-//	$sql = "SELECT pd_name
-//			FROM tbl_product
-//			WHERE pd_id = $pdId";
-//	
-//	$result    = dbQuery($sql);
-//	$row       = dbFetchAssoc($result);
-//	$pageTitle = $row['pd_name'];
-//	
-//} else if (isset($_GET['c']) && (int)$_GET['c'] > 0) {
-//	$catId = (int)$_GET['c'];
-//	$sql = "SELECT cat_name
-//	        FROM tbl_category
-//			WHERE cat_id = $catId";
-//
-//    $result    = dbQuery($sql);
-//	$row       = dbFetchAssoc($result);
-//	$pageTitle = $row['cat_name'];
-//}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -47,7 +19,7 @@ $pageTitle = 'CourseLamp';
 <link rel="stylesheet" type="text/css" href="stylesheet/styles.css" />
 <link rel="stylesheet" href="stylesheet/demo.css" type="text/css"  media="screen" /> 
 <!--<link rel="stylesheet" href="stylesheet/orangebox.css" type="text/css" />-->
-
+<!--<link href="/stylesheet/bootstrap.min.css" rel="stylesheet" media="screen"/>-->
 <script language="javascript" type="text/javascript">
 
 function clearText(field)
@@ -55,13 +27,20 @@ function clearText(field)
     if (field.defaultValue == field.value) field.value = '';
     else if (field.value == '') field.value = field.defaultValue;
 }
+function inc_loadingL_w(amount){
+    d = document.getElementById('loading_l');
+    d.style.width= amount+"%";
+
+}
 
 </script>
 <script type="text/javascript" src="scripts/jquery-1.10.0.min.js"></script>
+<!--<script language="javascript" type="text/javascript" >inc_loadingL_w('40');</script>-->
 <script type="text/javascript" src="scripts/jquery.animate-shadow-min.js"></script>
 <script type="text/javascript" src="scripts/Courselamp_functions.js"></script>
 <script src="scripts/jquery.localscroll-1.2.7-min.js" type="text/javascript"></script>
 <script src="scripts/jquery.scrollTo-1.4.3.1-min.js" type="text/javascript"></script> 
+<!--<script src="js/bootstrap.min.js"></script>-->
 <!--<script type="text/javascript" src="scripts/jquery.scrollTo-1.4.3.1-min.js"></script>-->
 <!--<script type="text/javascript" src="scripts/orangebox.min.js"></script>
 <script language="javascript" type="text/javascript" src="scripts/mootools-1.2.1-core.js"></script>

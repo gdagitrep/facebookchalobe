@@ -11,7 +11,7 @@ $result1=  dbQuery($sql1) or die('Cannot get questions. ' . mysql_error())    ;
 <div class="contentpadding">
     <div class="contentheading"><?php echo $namee;?> </div>
     <br/>
-    <div class="content">
+    <div class="content" style="margin-bottom: 40px">
         <?php echo $content; ?>
     </div>
         <?php $nq=mysql_num_rows($result1);

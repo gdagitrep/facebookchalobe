@@ -22,57 +22,32 @@ if (isset($_POST['txtnormalUserName'])) {
             <div id="header"><div class="right"></div>
             
                 <h1><a href="index.php">
-                        <img src="images/abc.png" alt="Site Title" height="42px"/>
+                        <img src="images/sparta.png" alt="Site Title" height="42px"/>
                     <span>Learn with Passion</span>
                 </a></h1>
             </div>
     </div>
 
-         <form method="post" name="frmLoginuser" id="frmLoginuser">
-<!--       <p>&nbsp;</p>-->
-       <table width="500" border="0" align="center" cellpadding="5" cellspacing="1" bgcolor="#336699" class="entryTable">
-        <tr id="entryTableHeaderuser">
-         <td>:: User Login ::</td>
-        </tr>
-        <tr> 
-         <td class="contentArea"> 
-		 <div class="errorMessage" align="center"><?php echo $errorMessage; ?></div>
-		  <table width="100%" border="0" cellpadding="2" cellspacing="1" class="text">
-           <tr align="center"> 
-            <td colspan="3">&nbsp;</td>
-           </tr>
-            <tr> 
-               <td colspan="2" align="right">Admin Access</td>
-            <td><div id="admin_box" >
-                <div class="buttons" >
-                <a href="../admin/index.php" class="button">Admin</a>
-                </div> 
-                </div>
-            </td>
-            </tr>
-           <tr> 
-               <td colspan="2" align="right">Not registered yet?</td>
-            <td><div class="buttons"><a href="../user_register.php" class="button">Register</a></div></td>
-           </tr>
-           <tr class="text"> 
-            <td width="100" align="right">User Name</td>
-            <td width="10" align="center">:</td>
-            <td><input name="txtnormalUserName" type="text" class="box" id="txtnormalUserName" value="" size="30" maxlength="50"></td>
-           </tr>
-           <tr> 
-            <td width="100" align="right">Password</td>
-            <td width="10" align="center">:</td>
-            <td><input name="txtnormalPassword" type="password" class="box" id="txtnormalPassword" value="" size="30"></td>
-           </tr>
-           <tr> 
-            <td colspan="2">&nbsp;</td>
-            <td><input name="btnnormalLogin" type="submit" class="box" id="btnnormalLogin" value="Login"></td>
-           </tr>
-          </table></td>
-        </tr>
-       </table>
+<form method="post" name="frmLoginuser" id="frmLoginuser">
+    <h2 class="form-signin-heading" style="font-size: 31.5px;">Please sign in</h2>
+    <div class="errorMessage" align="center"><?php echo $errorMessage; ?></div>
+    
+           
+    <input name="txtnormalUserName" type="text" class="box" id="txtnormalUserName" placeholder="Email address">
+            
+    <input name="txtnormalPassword" type="password" class="box" id="txtnormalPassword" placeholder="Password" >
+    <input name="btnnormalLogin" type="submit" class="box" id="btnnormalLogin" value="Login">
        <p>&nbsp;</p>
       </form>
 <p>&nbsp;</p>
+
+Admin Access
+    <div id="admin_box" >
+    <div class="buttons" >
+    <a href="../admin/index.php" class="button">Admin</a>
+    </div> 
+    </div>
+    Not registered yet?
+    <div class="buttons"><a href="../user_register.php" class="button">Register</a></div>
 </body>
 </html>

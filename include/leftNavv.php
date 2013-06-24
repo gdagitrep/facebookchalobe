@@ -14,9 +14,11 @@ while ($row = dbFetchAssoc($result0)) {
     $surl="index.php?&c=".$course."&su=".$subuniversity."&st=".$subt_id;
     
     ?>
-    <a class="topics"  <?php echo "href=\"$surl\""?>><font size="1.5" face="verdana">
+    <a class="topics lefttitle" title="<?php echo $topicc?>" <?php echo "href=\"$surl\""?>>
+        <font size="1.5" face="verdana">
         <span class="oneline"><?php echo  $topicc; ?></span></font></a>
-    <a class="subtopics" title="<?php echo $name?>" <?php echo "href=\"$surl\""?>><span class="oneline">
+    <a class="subtopics lefttitle" title="<?php echo $name?>" <?php echo "href=\"$surl\""?>>
+        <span class="oneline" <?php if($subtopicid==$subt_id){?>style="font-weight: bold"<? }?>>
         <font size="1.5" face="verdana" >
             <?php echo  $name; ?></font></span></a>
             <?php
@@ -26,7 +28,8 @@ while($row1=  dbFetchAssoc($result1)){
     $surl="index.php?&c=".$course."&su=".$subuniversity."&st=".$subt_id;
     ?>
         
-    <a class="subtopics" title="<?php echo $name?>" <?php echo "href=\"$surl\""?>><span class="oneline">
+    <a class="subtopics lefttitle" title="<?php echo $name?>" <?php echo "href=\"$surl\""?>>
+        <span class="oneline" <?php if($subtopicid==$subt_id){?>style="font-weight: bold"<? }?>>
         <font size="1.5" face="verdana" >
             <?php echo  $name; ?></font></span></a>
     <?php

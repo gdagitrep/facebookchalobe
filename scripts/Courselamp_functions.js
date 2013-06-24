@@ -4,7 +4,24 @@ jQuery.fn.toggleinline = function () {
     else
         return this.css('display', 'none');
 };
+
+
 jQuery(document).ready(function(){
+    $('body').append('<div id="anchorTitle" class="anchorTitle"></div>');
+    $('.lefttitle').each(function() {
+    var a = $(this);
+    a.hover(
+    function() {
+        showAnchorTitle(a, a.data('title'));
+    },
+    function() {
+        hideAnchorTitle();
+    }
+    )
+    .data('title', a.attr('title'))
+    .removeAttr('title');
+    });
+                
     var wrapperminH=jQuery(window).height()-42;
     jQuery('#wrapper').css('min-height',wrapperminH);
 //leftNav
@@ -418,4 +435,20 @@ var questionsolved=getCookie("qid"+qid);
   return questionsolved;
 };
     
- 
+ function showAnchorTitle(element, text) {
+
+                var offset = element.offset();
+
+                $('#anchorTitle')
+                .css({
+                    'top'  : (offset.top /*+ element.outerHeight() + 4*/) + 'px',
+                    'left' : offset.left + 'px'
+                })
+                .html(text)
+                .show();
+
+}
+
+function hideAnchorTitle() {
+    $('#anchorTitle').hide();
+}

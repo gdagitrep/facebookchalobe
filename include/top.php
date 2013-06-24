@@ -37,7 +37,7 @@ function hidesidebar(){
 
 </div>-->
 <div id="topbarfancy">
-    <a  style="display: inline-block; margin-left: 40px;width: 224px;height: 42px" href="/index.php" >
+    <a style="display: inline-block; margin-left: 40px;width: 224px;height: 42px" href="/index.php" >
         <img src="../images/capua_new.png" style="height: 42px;"/>
     </a>
 <div id="sidebarplusallcat" style="display: inline-block"
@@ -108,5 +108,7 @@ function hidesidebar(){
 
 </div></div><?php //echo "pd"?>    
 </div> <!-- end of topmost_header -->
+<div id="loading_l" style="height: 1px;    background: #00F8FB;    position: fixed;    width: 0px;-webkit-transition: all 1s ease;">
+</div>
 
     

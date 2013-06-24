@@ -27,6 +27,7 @@ else
     if($nothome !=1){ ?>
         <img src="/images/2020485686.jpg" style="width: 100%;margin-top: -23%;"/>
     <?php }?>
+<script language="javascript" type="text/javascript" >inc_loadingL_w('20');</script>
 <div id="wrapper">
     <?php 
     if($nothome !=1){ 
@@ -36,7 +37,7 @@ else
     if($course!=0){
         require_once 'include/leftNavv.php';
     ?>
-    
+    <script language="javascript" type="text/javascript" >inc_loadingL_w('60');</script>
     <?php
     if($subtopicid==0)
         require_once 'include/picturization.php';
@@ -45,10 +46,12 @@ else
     ?>
     <?php
         }?>
-
+<script language="javascript" type="text/javascript" >inc_loadingL_w('90');</script>
 </div> <!-- end of wrapper -->
 </body>
 <?php
     require_once 'include/footer.php';
 ?>
+<script language="javascript" type="text/javascript" >inc_loadingL_w('100');
+document.getElementById('loading_l').style.background='rgba(255,255,255,0.32)'; </script>
 
