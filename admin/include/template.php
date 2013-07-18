@@ -20,6 +20,19 @@ for ($i = 0; $i < $n; $i++) {
 	}
 }
 ?>
+<script>
+function ajaxcall2()
+{return jQuery.ajax({                           
+      url: '/admin/include/ajaxqueries.php',data: "",dataType: 'json' 
+    });
+  };
+  function gethelp(){
+    jQuery('#hiddenhelp').show();
+    var promise2 = ajaxcall2();promise2.success(function(data){
+      jQuery("#helptext").html(data[0]);});
+  }
+</script>
+
 <script type="text/javascript" src="<?php echo WEB_ROOT;?>admin/library/js/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript" src="<?php echo WEB_ROOT;?>admin/library/js/tinymce/jscripts/tiny_mce/plugins/asciimath/js/ASCIIMathMLwFallback.js"></script>
 <script type="text/javascript" src="<?php echo WEB_ROOT;?>admin/library/js/tinymce/jscripts/tiny_mce/plugins/asciisvg/js/ASCIIsvg.js"></script>
@@ -27,7 +40,8 @@ for ($i = 0; $i < $n; $i++) {
  var AScgiloc = 'http://www.imathas.com/imathas/filter/graph/svgimg.php';
  var AMTcgiloc = "http://www.imathas.com/cgi-bin/mimetex.cgi";
 </script>
-
+<script type="text/javascript" src="/admin/library/latexit.js"></script>
+<script type="text/javascript">LatexIT.add('p',true);</script>
 <script type="text/javascript">
 var AMTcgiloc = "http://www.imathas.com/cgi-bin/mimetex.cgi";  		//change me
 tinyMCE.init({
@@ -39,10 +53,9 @@ tinyMCE.init({
 
         // Theme options
         //
-        theme_advanced_buttons1 : "newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
-        theme_advanced_buttons2 : "tiny_mce_wiris_formulaEditor,asciimath,asciimathcharmap,asciisvg,|,cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
-        theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
-        theme_advanced_buttons4 : "jbimages,|,insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak",
+        theme_advanced_buttons1 : "fullscreen,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+        theme_advanced_buttons2 : "tiny_mce_wiris_formulaEditor,asciimath,asciimathcharmap,asciisvg,|,cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,preview,|,forecolor,backcolor",
+        theme_advanced_buttons3 : "jbimages,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,hr,removeformat,visualaid,|, tablecontrols",
         theme_advanced_toolbar_location : "top",
         theme_advanced_toolbar_align : "left",
         theme_advanced_statusbar_location : "bottom",
@@ -76,16 +89,18 @@ tinyMCE.init({
 
 </head>
 <body>
+<div id="hiddenhelp" onclick="jQuery('#hiddenhelp').hide();"><div id="helptext"></div></div><div>
 <table width="auto" border="0" align="center" cellpadding="0" cellspacing="1" class="graybox">
   <tr>
     <td width="150" valign="top" class="navArea"><p>&nbsp;</p>
-          <a href="<?php echo WEB_ROOT; ?>" class="leftnav">User Site</a> 
-          <a href="<?php echo WEB_ROOT; ?>admin/" class="leftnav">Home</a> 
+    <a href="<?php echo WEB_ROOT; ?>" class="leftnav">User Site</a> 
+    <a href="<?php echo WEB_ROOT; ?>admin/" class="leftnav">Home</a> 
 	  <a href="<?php echo WEB_ROOT; ?>admin/universities/" class="leftnav">Universities</a>
 	  <a href="<?php echo WEB_ROOT; ?>admin/courses/" class="leftnav">Courses</a> 
 	  <a href="<?php echo WEB_ROOT; ?>admin/topics" class="leftnav">Topics</a> 
-          <a href="<?php echo WEB_ROOT; ?>admin/subtopics" class="leftnav">SubTopics/Content</a> 
-          <a href="<?php echo WEB_ROOT; ?>admin/topics" class="leftnav" title="To add/modify questions, select topic">Questions</a> 
+    <a href="<?php echo WEB_ROOT; ?>admin/subtopics" class="leftnav">SubTopics/Content</a> 
+    <a href="<?php echo WEB_ROOT; ?>admin/topics" class="leftnav" title="To add/modify questions, select topic">Questions</a> 
+    <a onclick="gethelp()" style="background-color: #81F078;cursor: pointer;height: 52px; " class="leftnav">Help in Equation writing</a>       
 	  <a href="<?php echo WEB_ROOT; ?>admin/config/" class="leftnav">CourseLamp Config</a> 
 	  <a href="<?php echo WEB_ROOT; ?>admin/user/" class="leftnav">User</a> 
 	  <a href="<?php echo $self; ?>?logout" class="leftnav">Logout</a>

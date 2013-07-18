@@ -5,6 +5,9 @@
  * and open the template in the editor.
  */
 ?>
+<!-- <script type="text/javascript" src="scripts/fbscrolling.js"></script> -->
+<script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>
+<script type="text/javascript">LatexIT.add('p',true);</script>
 <div class="panel1" style="clear: both; margin-top:0px; width:100%; height:auto; text-align:center; background: url('/images/bg_footer2.png') repeat scroll 0 0 transparent;"><div style="width:980px;margin:0 auto;">
         <div id="pp" style="margin-top:20px;;;width:650px;float:left;">
             <h3>Quick Links </h3>
@@ -13,10 +16,10 @@
                     <div style=" float:left">
                         <table style=" width:650px;height:99%;color:#ccc; ">
                             <tbody>
-                                <tr><td style="width:120px;"> <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="/gifts/youthmarried/justlikethat/friendher" style="color:#888888; text-decoration:none;">A</a> </h5> </td>
-                                    <td style="width:120px;"> <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="/gifts/youthmarried/justlikethat/friendhim" style="color:#888888; text-decoration:none;">B</a> </h5> </td>
-                                    <td style="width:120px;"> <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto;font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="/gifts/teenager/justlikethat/friendher" style="color:#888888; text-decoration:none;">C</a> </h5> </td>
-                                    <td style="width:120px;"> <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="/gifts/teenager/justlikethat/friendhim" style="color:#888888; text-decoration:none;">D</a> </h5> </td></tr>
+                                <tr><td style="width:120px;"> <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="" style="color:#888888; text-decoration:none;">A</a> </h5> </td>
+                                    <td style="width:120px;"> <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="" style="color:#888888; text-decoration:none;">B</a> </h5> </td>
+                                    <td style="width:120px;"> <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto;font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="" style="color:#888888; text-decoration:none;">C</a> </h5> </td>
+                                    <td style="width:120px;"> <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="" style="color:#888888; text-decoration:none;">D</a> </h5> </td></tr>
                                 <tr>
                                     <td style="width:120px;"> <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="/admin/index.php" style="color:#888888; text-decoration:none;">Admin</a> </h5> </td>
                             </tbody>
@@ -30,10 +33,10 @@
                                 <div style=" text-align:left;">
                                     <div style="margin-left:15px; margin-top:10px; ">
                                         <div style="margin-left: auto; float:left">
-                                            <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px; color:#888888;"> <a href="/contactus/" style="color:#888888; text-decoration:none;">Contact Us</a> </h5>
-                                            <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="/aboutus/" style="color:#888888; text-decoration:none;"> About Us</a> </h5> 
-                                            <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="/privacy/" style="color:#888888; text-decoration:none;">Privacy policy</a> </h5> 
-                                            <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="/terms/" style="color:#888888; text-decoration:none;">Terms &amp; Conditions</a> </h5>
+                                            <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px; color:#888888;"> <a href="" style="color:#888888; text-decoration:none;">Contact Us</a> </h5>
+                                            <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="" style="color:#888888; text-decoration:none;"> About Us</a> </h5> 
+                                            <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="" style="color:#888888; text-decoration:none;">Privacy policy</a> </h5> 
+                                            <h5 style="color:#444444; cursor:default; margin:auto auto 5px auto; font-family:'Oxygen', sans-serif; font-size:13px;"> <a href="" style="color:#888888; text-decoration:none;">Terms &amp; Conditions</a> </h5>
                                         </div></div></div></div></div>
                         
                         <div class="cl">

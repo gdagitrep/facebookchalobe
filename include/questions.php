@@ -20,11 +20,11 @@ if($action=='getq'){
         $sql= "select A,B,C,D,E from answer_objective where Q_id='$Q_id';";
         $result2= dbQuery($sql) or die('Cannot get options. ' . mysql_error());
         extract(mysql_fetch_assoc($result2));
-        $ret[0]=$ret[0]."<tr><td>   </td><td> <input type=\"radio\" value=\"A\" name= \"corans\" onchange=\"changegr();\" /></td><td>".$A."</td></tr>";
-        $ret[0]=$ret[0]."<tr><td>   </td><td> <input type=\"radio\" value=\"B\" name= \"corans\" onchange=\"changegr();\" /></td><td>".$B."</td></tr>";
-        $ret[0]=$ret[0]."<tr><td>   </td><td> <input type=\"radio\" value=\"C\" name= \"corans\" onchange=\"changegr();\" /></td><td>".$C."</td></tr>";
-        $ret[0]=$ret[0]."<tr><td>   </td><td> <input type=\"radio\" value=\"D\" name= \"corans\" onchange=\"changegr();\" /></td><td>".$D."</td></tr>";
-        $ret[0]=$ret[0]."<tr><td>   </td><td> <input type=\"radio\" value=\"E\" name= \"corans\" onchange=\"changegr();\" /></td><td>".$E."</td></tr>";
+        $ret[0]=$ret[0]."<tr><td style=\"width:40px\">   </td><td style=\"width:12px\"> <input type=\"radio\" style=\"width:12px\" value=\"A\" name= \"corans\" onchange=\"changegr();\" /></td><td style=\"padding-left: 20px\">".$A."</td></tr>";
+        $ret[0]=$ret[0]."<tr><td style=\"width:40px\">   </td><td style=\"width:12px\"> <input type=\"radio\" style=\"width:12px\" value=\"B\" name= \"corans\" onchange=\"changegr();\" /></td><td style=\"padding-left: 20px\">".$B."</td></tr>";
+        $ret[0]=$ret[0]."<tr><td style=\"width:40px\">   </td><td style=\"width:12px\"> <input type=\"radio\" style=\"width:12px\" value=\"C\" name= \"corans\" onchange=\"changegr();\" /></td><td style=\"padding-left: 20px\">".$C."</td></tr>";
+        $ret[0]=$ret[0]."<tr><td style=\"width:40px\">   </td><td style=\"width:12px\"> <input type=\"radio\" style=\"width:12px\" value=\"D\" name= \"corans\" onchange=\"changegr();\" /></td><td style=\"padding-left: 20px\">".$D."</td></tr>";
+        $ret[0]=$ret[0]."<tr><td style=\"width:40px\">   </td><td style=\"width:12px\"> <input type=\"radio\" style=\"width:12px\" value=\"E\" name= \"corans\" onchange=\"changegr();\" /></td><td style=\"padding-left: 20px\">".$E."</td></tr>";
             }
     $ret[0]=$ret[0]."</table>";
     
@@ -67,13 +67,37 @@ if($action=='geta'){
         else
             $ret[1]="0";
     }
-    $sql= "select answer from questions where Q_id='$Q_id';";
+    $sql= "select answer,solution from questions where Q_id='$Q_id';";
     $result1= dbQuery($sql) or die('Cannot get answer. ' . mysql_error())    ;
     extract(mysql_fetch_assoc($result1));
     if($sel!= -1 && $sel== $answer)
         $ret[0]=1;
     else
         $ret[0]=0;
+    if($ret[0]==1){//if answer is correct, obtain hint and expl
+        $ret[6]="<div><p onclick=\"jQuery('#hintcontent').slideToggle(500);\" style=\"cursor: pointer; font-weight: bold\">Hint </p><div id=\"hintcontent\" style=\"padding-left:47px\">".$hint."</div></div>";
+        $ret[7]="<div><p onclick=\"jQuery('#explcontent').slideToggle(500);\" style=\"cursor: pointer; font-weight: bold\">Explanation </p><div id=\"explcontent\" style=\"padding-left:47px\">".$solution."</div></div>";
+    }
+}
+if($action=='geth'){
+    $sql="select hint,solution, answer,type from questions where Q_id='$Q_id'";
+    $result=dbQuery($sql) or die('Cannot get hint. ' . mysql_error())    ;
+    extract(mysql_fetch_assoc($result));
+    
+    $ret[6]="<div><p onclick=\"jQuery('#hintcontent').slideToggle(500);\" style=\"cursor: pointer; font-weight: bold\">Hint </p><div id=\"hintcontent\" style=\"padding-left:47px\">".$hint."</div></div>";
+    if($type=="S"){
+        $ret[8]="<div><p onclick=\"jQuery('#anscontent').slideToggle(500);\" style=\"cursor: pointer; font-weight: bold\">Answer </p><div id=\"anscontent\" style=\"padding-left:47px\">".$answer."</div></div>";
+        $ret[7]="<div><p onclick=\"jQuery('#explcontent').slideToggle(500);\" style=\"cursor: pointer; font-weight: bold\">Explanation </p><div id=\"explcontent\" style=\"padding-left:47px\">".$solution."</div></div>";
+    }
+    else
+        setquserdetails();
+}
+if($action=='getexpl'){ //will be used for objectve questions
+    $sql="select solution, answer from questions where Q_id='$Q_id'";
+    $result=dbQuery($sql) or die('Cannot get hint. ' . mysql_error())    ;
+    extract(mysql_fetch_assoc($result));
+    $ret[8]="<div><p onclick=\"jQuery('#anscontent').slideToggle(500);\" style=\"cursor: pointer; font-weight: bold\">Answer </p><div id=\"anscontent\" style=\"padding-left:47px\">".$answer."</div></div>";
+    $ret[7]="<div><p onclick=\"jQuery('#explcontent').slideToggle(500);\" style=\"cursor: pointer; font-weight: bold\">Explanation </p><div id=\"explcontent\" style=\"padding-left:47px\">".$solution."</div></div>";
 }
 if($action=='getquserdetails'){ // get question stats for user (known user)
     if($uidphp!='notknown'){
@@ -90,22 +114,31 @@ if($action=='getquserdetails'){ // get question stats for user (known user)
 }
 
 if($action=='setquserdetails'){ // set question stats for user (known user)
+    setquserdetails();
+    $ret[0]="1";
+}
+
+function setquserdetails(){
     if($uidphp!='notknown'){
-        $w= isset($_GET['w']) ? $_GET['w'] : '0';
-        $h= isset($_GET['h']) ? $_GET['h'] : '0';
-        $c= isset($_GET['c']) ? $_GET['c'] : '0';
-        $s= isset($_GET['s']) ? $_GET['s'] : '0';
-            //to find out if we have to insert or update
-            $sql="select * from users_ques where u_id='$uidphp' and Q_id='$Q_id';";
-            $result=dbQuery($sql) or die('Cannot get questions. ' . mysql_error());
-            if(mysql_num_rows($result)>0){
-                //then update
-                $sql1="UPDATE users_ques SET `hinted`='$h',`wronged`='$w',`completed`='$c',`score`='$s' WHERE u_id='$uidphp' and Q_id='$Q_id'";
-            }
-            else{
-                $sql1="INSERT INTO `users_ques`(`u_id`, `Q_id`, `hinted`, `wronged`, `completed`, `score`) VALUES ('$uidphp','$Q_id','$h','$w','$c','$s')";
-            }
-            $result1=dbQuery($sql1) or die('Cannot get questions. ' . mysql_error());
+        //to find out if we have to insert or update
+        $sql="select wronged,hinted, completed, score from users_ques where u_id='$uidphp' and Q_id='$Q_id';";
+        $result=dbQuery($sql) or die('Cannot get questions. ' . mysql_error());
+        if(mysql_num_rows($result)>0){
+            //then update
+            $w= isset($_GET['w']) ? $_GET['w'] : $wronged;
+            $h= isset($_GET['h']) ? $_GET['h'] : $hinted;
+            $c= isset($_GET['c']) ? $_GET['c'] : $completed;
+            $s= isset($_GET['s']) ? $_GET['s'] : $score;
+            $sql1="UPDATE users_ques SET `hinted`='$h',`wronged`='$w',`completed`='$c',`score`='$s' WHERE u_id='$uidphp' and Q_id='$Q_id'";
+        }
+        else{
+            $w= isset($_GET['w']) ? $_GET['w'] : '-1';
+            $h= isset($_GET['h']) ? $_GET['h'] : '-1';
+            $c= isset($_GET['c']) ? $_GET['c'] : '-1';
+            $s= isset($_GET['s']) ? $_GET['s'] : '-1';
+            $sql1="INSERT INTO `users_ques`(`u_id`, `Q_id`, `hinted`, `wronged`, `completed`, `score`) VALUES ('$uidphp','$Q_id','$h','$w','$c','$s')";
+        }
+        $result1=dbQuery($sql1) or die('Cannot get questions. ' . mysql_error());
         $ret[0]="1"; //always
     }
 }

@@ -51,25 +51,30 @@ function hidesidebar(){
 
         <div class="sidebar_section">
         <?php 
-            $sql = "SELECT * FROM courses ORDER BY name";
-            $result0 = dbQuery($sql);
-            while ($row = dbFetchAssoc($result0)) {
+        $course_storage=array();
+        $sql = "SELECT course_id, name , description  FROM courses ORDER BY name";
+        $result = dbQuery($sql);
+        while ($row = dbFetchAssoc($result)) {
 
             extract($row);
-            $cname= $name; $curl=$_SERVER['PHP_SELF'] . '?c=' . $course_id;
+            $cname= $name; $curl=$_SERVER['PHP_SELF'] . '?c=' . encrypt($course_id);
+            $course_storage[$course_id]=array('curl'=> $curl ,
+                       'name'  => $name, 'description'=>$description);
+
+            
             ?>
             <div class="Courses-tab">
 
             <a class="denapada" href="<?php echo $curl; ?>"><?php echo " $cname"; ?></a>
-                <div class="popout_all">
+                <!-- <div class="popout_all">
                 <?php 
-                echo $cname.' taught at:';
+                // echo $cname.' taught at:';
                     ?>
                     <div class="Universities-tab">
-                    <a class="denapada2" <?php echo "href=\"$curl&su=4\""?>><?php echo "IIT Patna- MA 101"; ?></a></div>
+                    <a class="denapada2" <?php //echo "href=\"$curl&su=4\""?>><?php //echo "IIT Patna- MA 101"; ?></a></div>
                     <div class="Universities-tab">
-                    <a class="denapada2" <?php echo "href=\"$curl&su=1\""?>><?php echo "IIT Bombay- MA 101"; ?></a> </div>
-                </div>      
+                    <a class="denapada2" <?php //echo "href=\"$curl&su=1\""?>><?php //echo "IIT Bombay- MA 101"; ?></a> </div>
+                </div>   -->    
             </div>
             <?php
             }
@@ -79,32 +84,7 @@ function hidesidebar(){
         </div>
 </div> <!-- end of sidebar  -->
 </div> <!--end of sidebarplusallcat-->
-<div id="progress_whole" style="margin-right: 10px; display:  inline">
-    <div id="cart_button" 
-         ><a>Show Progress</a></div>
-
-    <div id="progress_dropdown">
-        <div id="chalopub"></div>
-        <div id="dropdown_content">
-            <?php
-            if (!isset($_SESSION['normal_user_id']))
-            {?><div id="notloggedin"><a href="../user_login.php">
-                <?php
-                echo "Log in to save your progress";
-                ?>
-            </a></div>
-            <?php
-            }
-            ?>
-
-            <div style="background-image: url('images/380.gif');position: relative;
-            min-height: 50px;
-            background-repeat: no-repeat;
-            top: 40px;
-            left: 80px;width: 65px"></div>
-            <?php require_once 'include/progress.php' ?>
-        </div>
-    </div>
+<?php //require_once 'include/progress.php' ?>
 
 </div></div><?php //echo "pd"?>    
 </div> <!-- end of topmost_header -->

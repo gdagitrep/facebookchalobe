@@ -36,9 +36,15 @@ function checkAddQuestionForm()
                     alert('Write question text');
                     return;
 		} else {
-                    if(jQuery('input[name=correctans]:radio:checked').val()=="0")
-                        {alert('Select the correct option');
-                    return}
+			var qt=jQuery('input[name=qtype]:radio:checked').val();
+			if(qt=="0" || typeof qt ==="undefined"){
+				alert('Select question type');return;}
+			else{
+				if(qt=="O"){
+					var cs=jQuery('input[name=correctans]:radio:checked').val();
+                    if(cs=="0" || typeof cs ==="undefined"){
+                    	alert('Select the correct option');
+                    	return;}
                     else{
                         if(tinyMCE.get('txt'+(jQuery('input[name=correctans]:radio:checked').val())+'option').getContent()=="")
                             alert('You forgot to mention the text in the correct options box');
@@ -46,6 +52,17 @@ function checkAddQuestionForm()
                             submit();
 
                     }
+                }
+                else{ //if(qt=="S")
+                	if(tinyMCE.get('correctansS').getContent()==""){
+                		alert('Please mention the answer to this subjective question');
+                		return;
+                	}
+                	else
+                		submit();
+
+            	}
+			}
 		}
 	}
 }

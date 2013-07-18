@@ -139,7 +139,6 @@ jQuery(document).ready(function(){
     //jQuery('#nav').localScroll({duration:800});
     jQuery('#tutt').localScroll({duration:800,lazy:true});
     
-    
 });
 
 
@@ -172,18 +171,19 @@ function ajaxcall(action,uid,qid,n, sel,whcs) // n for question no starting from
   
 function getquestion(uidjs,qidjs,n,nq){ // n is the number (starting from 1) of question, 
                                     //while qid is the id of the question as per table
+  stg=1; //used to represent stages of Hint,Answer,Explanation
   var promise = ajaxcall('getq',uidjs,qidjs,n,-1,'&');
   promise.success(function(data){
       jQuery("#questiontext").html(data[0]);
       var qsolved,w,h,c;
-      score= data[5]; // *****
+      scoreqt= data[5]; // ***** score from question table
       if(uidjs != 'notknown'){
           if(data[1]=='1') {//i.e. there is entry for this question in database for this user
               qsolved= data[1];
-              w=data[2];h=data[3];c=data[4];score=data[5]; 
+              w=data[2];h=data[3];c=data[4];s=data[5]; 
           }
           else{
-              qsolved= null;
+              qsolved= null; s=scoreqt;
           }
       }
       else{
@@ -193,8 +193,10 @@ function getquestion(uidjs,qidjs,n,nq){ // n is the number (starting from 1) of 
               w=vars[0];
               h=vars[1];
               c=vars[2];
-              score=vars[3]; //overwrites the above stored value // *****
+              s=vars[3]; //doesnt overwrite the above stored value in scoreqt // *****
           }
+          else
+            s=scoreqt;
       }
       
       
@@ -218,7 +220,7 @@ function getquestion(uidjs,qidjs,n,nq){ // n is the number (starting from 1) of 
               }
               else{
                 wronganswer(n,nq);
-                jQuery('#msg').html('<span style="color: red">Wrong attempt!!Get hint, and try again</span>');
+                jQuery('#msg').html('<span style="color: red">You attempted it wrong Once!! Try again</span>');
                     //refreshquestionnaire(n,nq);
               }
           }
@@ -230,10 +232,11 @@ function getquestion(uidjs,qidjs,n,nq){ // n is the number (starting from 1) of 
                 jQuery('#buttonsubmitcover').hide();
           }
           
-         
+         scoreimg(s);
       }
-      else
-          refreshquestionnaire(n,nq);
+      else{
+          refreshquestionnaire(n,nq); scoreimg(scoreqt);
+        }
   });
 };
 function submitanswer(qidjs,uidjs,n,nq){
@@ -252,7 +255,7 @@ function submitanswer(qidjs,uidjs,n,nq){
           s=vars[3];
       }
       else{w=0; h=0; c=0; 
-          s= score; // default score of the question from questions table
+          s= scoreqt; // default scoreqt of the question from questions table
       }
   }
     promise.success(function(data){
@@ -266,12 +269,12 @@ function submitanswer(qidjs,uidjs,n,nq){
             //2 -> wronged(1) or not (0)
             //3 -> hinted (1) or not (0)
             //4 -> completed (1) or not (0)
-            //5 -> score -- left after all kind of deductions for every wrong action/ hint action/ 
+            //5 -> scoreqt -- left after all kind of deductions for every wrong action/ hint action/ 
                             //or 0 if two wrong tries have been exhausted
-            w=data[2]; h= data[3];c=data[4];score=s= data[5];
+            w=data[2]; h= data[3];c=data[4];s= data[5];
             }
             else
-                {w=0; h=0; c=0; s=score;}
+                {w=0; h=0; c=0; s=scoreqt;}
         }
         if(ajaxcorans != 0){
             correctans(n,nq);
@@ -290,11 +293,12 @@ function submitanswer(qidjs,uidjs,n,nq){
              wronganswer(n,nq);
              w=w+1;
              if(w<2){
-                s= score = score/2;
+                s= s/2;
+                scoreimg(s);
                 if(uidjs=='notknown')
                     setCookie('qid'+qidjs,w+'&'+h+'&'+'0&'+s,1);
                     //set Wronged text as new w
-                    //update scores visible above
+                    
                 else{
                     var succ;
                     var promise1 = ajaxcall('setquserdetails',uidjs,qidjs,-1,-1,'&w='+w+'&h='+h+'&c=0&s='+s);
@@ -305,7 +309,8 @@ function submitanswer(qidjs,uidjs,n,nq){
              }
              else{
                 jQuery('#buttonsubmitcover').hide();
-                 score=2;
+                 s=0;
+                 scoreimg(s);
                 if(uidjs=='notknown')
                     setCookie('qid'+qidjs,'2&'+h+'&'+'1&0',1);
                    //set Wronged text as 2
@@ -321,6 +326,97 @@ function submitanswer(qidjs,uidjs,n,nq){
         }
     });
 };
+function showhint(qidjs,uidjs){
+  stg='2';
+  if(scoreqt!="0") // means its not subjective
+  {
+    if(uidjs=='notknown'){
+      var qsolved=checkCookie(qidjs);
+      if(qsolved!=null && qsolved!=""){
+            var vars = qsolved.split('&');
+            w=vars[0];
+            h=vars[1];
+            c=vars[2];
+            s=vars[3];
+      }
+      else{w=0; c=0; h=0;
+            s= scoreqt; // default scoreqt of the question from questions table
+        }
+    }
+    if(h!=1){
+      s= s-2;
+      scoreimg(s);
+      h=1;
+      if(uidjs=='notknown'){
+        setCookie('qid'+qidjs,w+'&'+h+'&'+'0&'+s,1);
+      }
+    }
+    var promise = ajaxcall('geth',uidjs,qidjs,-1,-1,'&w='+w+'&h='+h+'&c=0&s='+s);
+    }
+    else
+      var promise = ajaxcall('geth',uidjs,qidjs,-1,-1,'&');//no need to set anything for SQs
+    
+    
+    promise.success(function(data){
+        var hinttext= data[6];
+        if(scoreqt==0){ //for SQ, get answer and expl in one go, however, they will be displayed later. But not for OQs
+          anstext=data[8];
+          expltext=data[7];
+        }
+        if(hinttext!=null && hinttext !=""){
+          jQuery('#hinttext').html(hinttext);
+        }else{
+          jQuery('#hinttext').html("No hint yet available; ur scores are intact");
+
+          //revert back changes to questionuser
+          if(uidjs=='notknown'){
+            s=s+2;
+            setCookie('qid'+qidjs,w+'&'+h+'&'+'0&'+s,1);
+          }else{
+            var promise1 = ajaxcall('setquserdetails',uidjs,qidjs,-1,-1,'&w='+w+'&h='+h+'&c=0&s='+s);
+                promise1.success(function(data1){
+                    succ=data1[0]; //of no use for now
+                });
+          }
+
+        }
+        jQuery('#buttonhint').text('Show Answer');
+    });
+  
+}
+
+function showans(qidjs,uidjs){
+  stg='3';
+  scoreimg(0);
+  if(scoreqt==0){ //ie. subjective question
+    jQuery('#anstext').html(anstext);
+    jQuery('#solntext').html(expltext);
+    jQuery('#buttonhintcover').hide();
+  }
+  else
+    var promise = ajaxcall('getexpl',uidjs,qidjs,-1,-1,'&h=1&c=1&s=0');
+
+    promise.success(function(data){
+        anstext=data[8];
+        expltext=data[7];        
+        jQuery('#anstext').html(anstext);
+        jQuery('#solntext').html(expltext);
+        jQuery('#buttonhintcover').hide();
+    });
+    if(uidjs=='notknown'){ //check it again, not complete -----------
+        var w;
+        var qsolved=checkCookie(qidjs);
+        if(qsolved!=null && qsolved!=""){
+          var vars = qsolved.split('&');
+          w=vars[0];
+        }
+        else{
+            w=0;
+        }
+        setCookie('qid'+qidjs,w+'&1&1&0',1); //we are assuming hint as 1 for ans to see
+    }
+  
+}
 function skip(qidjs,uidjs){
     if(uidjs=='notknown'){
         var w,h, c, s;
@@ -335,21 +431,28 @@ function skip(qidjs,uidjs){
         else{
             
             w=0; h=0; c=0; 
-            s= score; // default score of the question from questions table
+            s= scoreqt; // default scoreqt of the question from questions table
         }
         setCookie('qid'+qidjs,w+'&'+h+'&'+c+'&'+s,1);
     }
 }
 
-function changegr(){
-    jQuery('#buttonsubmit').removeClass('button').addClass('greenbutton');
+function changegr(){ // rather show submit button 
+    //jQuery('#buttonsubmit').removeClass('button').addClass('greenbutton');
+    jQuery('#buttonsubmitcover').show();
 };
-function scoreimg(){
+function scoreimg(scorefloat){
+  if(scoreqt!='0'){
+    jQuery('#ido12').html(scorefloat+'/'+scoreqt);
     jQuery('#ido12').stop().animate({
         boxShadow: '0 1px 20px 5px'},'normal').animate({
         boxShadow:"0 1px 2px 1px"},'normal').animate({
         boxShadow: '0 1px 20px 5px'},'normal').animate({
         boxShadow:"0 1px 2px 1px"},'normal');
+  }
+  else{
+    jQuery('#ido12').html('NA');
+  }
 //        "-webkit-box-shadow":"0 1px 2px 1px rgba(0, 51, 255, 0.96)"});
 };
 function correctans(n,nq){ // set buttons in case answer is correct
@@ -365,10 +468,9 @@ function correctans(n,nq){ // set buttons in case answer is correct
         jQuery('#buttonnextcover').hide();
 };
 function wronganswer(n,nq){//set buttons in case answer is wrong
-    jQuery('#buttonsubmitcover').show();
+    jQuery('#buttonsubmitcover').hide();
     jQuery('#buttonsubmit').removeClass('greenbutton').addClass('button');
-//      jQuery('#buttonsubmit').text('Wrong!');
-    jQuery('#msg').html('<span style="color: red">Wrong!! Get the hint, and try again</span>');
+    jQuery('#msg').html('<span style="color: red">Wrong!! Get hint, and try again</span>');
     if(n<nq)
     {
         jQuery('#buttonnextcover').show();
@@ -381,11 +483,11 @@ function wronganswer(n,nq){//set buttons in case answer is wrong
     jQuery('#buttonhint').removeClass('greenbutton');
 };
 function refreshquestionnaire(i,nq){
-    jQuery('#buttonsubmit').removeClass('greenbutton').addClass('button');
-    jQuery('#buttonsubmit').text('Submit');
-     jQuery('#msg').html('');
-    jQuery('#buttonsubmitcover').show();
+    //jQuery('#buttonsubmit').text('Submit');
+    jQuery('#msg').html('');
+    jQuery('#buttonsubmitcover').hide();
     jQuery('#buttonhint').text("Show Hint");
+    jQuery('#hinttext').html("");
     jQuery('#buttonhint').removeClass('greenbutton');
     if(i>=nq)
         jQuery('#buttonnextcover').hide();
@@ -395,6 +497,7 @@ function refreshquestionnaire(i,nq){
         jQuery('#buttonnext').text('Skip to Next question');
     }
 };
+
 
 function getCookie(c_name)
 {

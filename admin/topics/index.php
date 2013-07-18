@@ -39,7 +39,7 @@ switch ($view) {
 		$content    = 'detail.php';
 		$pageTitle  = 'CourseLamp Admin Control Panel - View Topic Detail';
 		break;
-		
+	
 	default :
 		$content 	= 'list.php';		
 		$pageTitle 	= 'CourseLamp Admin Control Panel - View Topic';

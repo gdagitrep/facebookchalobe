@@ -5,10 +5,10 @@ if (isset($_GET['logout']))
     us_doLogout();
 	
 //also change the name of the page title in header.php
-$course  = (isset($_GET['c']) && $_GET['c'] != '') ? $_GET['c'] : 0;  /*corresponds to the category id shown by the current page link */
+$course  = (isset($_GET['c']) && $_GET['c'] != '') ? decrypt($_GET['c']) : 0;  /*corresponds to the category id shown by the current page link */
 //$university  = (isset($_GET['u']) && $_GET['u'] != '') ? $_GET['u'] : 0;
-$subuniversity= (isset($_GET['su']) && $_GET['su'] != '') ? $_GET['su'] : 0;
-$subtopicid= (isset($_GET['st']) && $_GET['st'] != '') ? $_GET['st'] : 0;
+$subuniversity= (isset($_GET['su']) && $_GET['su'] != '') ? decrypt($_GET['su']) : 0;
+$subtopicid= (isset($_GET['st']) && $_GET['st'] != '') ? decrypt($_GET['st']) : 0;
 
 if ($course!=0 || $subuniversity != 0)
     $nothome=1;
@@ -25,7 +25,11 @@ else
     <?php
     require_once 'include/top.php';
     if($nothome !=1){ ?>
-        <img src="/images/2020485686.jpg" style="width: 100%;margin-top: -23%;"/>
+        <div style="background: url('/images/2020485686.jpg');width: 100%;margin-top: -23%;
+height: 810px;
+background-repeat: no-repeat;
+min-width: 100%;
+background-size: cover;"></div>
     <?php }?>
 <script language="javascript" type="text/javascript" >inc_loadingL_w('20');</script>
 <div id="wrapper">

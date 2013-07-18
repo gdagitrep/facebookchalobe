@@ -9,6 +9,12 @@ else{
     $dbPass = 'lala';//3e0dae209jjGi120jdf_#9120j0';
     $dbName = 'education';
 
+    //for 000webhost.com
+//     $dbHost = "mysql13.000webhost.com";
+// $dbName = "a3282150_educate";
+// $dbUser = "a3282150_normal";
+// $dbpass = "facebook123";
+
     // setting up the web root and server root for
     // this shopping cart application
     $thisFile = str_replace('\\', '/', __FILE__);

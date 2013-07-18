@@ -17,10 +17,12 @@ if (isset($_GET['TopicId']) && $_GET['TopicId'] > 0) {
     function objective(){
    jQuery('#objquestions').css('display', 'table-row');
    jQuery('#subquestions').css('display', 'none');
+   jQuery('#mmrow').show();
 }
 function subjective(){
-    jQuery('#objquestions').css('display', 'none');
+   jQuery('#objquestions').css('display', 'none');
    jQuery('#subquestions').css('display', 'table-row');
+   jQuery('#mmrow').show();
 }
 </script>
 <p>&nbsp;</p>
@@ -47,19 +49,20 @@ while($row = dbFetchAssoc($result)) {
    <td width="100" class="label">Question</td>
    <td class="content"> 
        <textarea name="txtquestiontext"></textarea>
-<!--       <input name="txtName" type="text" class="box" id="txtName" size="50" maxlength="100">-->
    </td>
     
   </tr>
   <tr><td>Question type</td>
       <td>
-          Objective (only this type is enabled for now)
-<!--          <input name="qtype" type="radio" value="O" onclick="jQuery(objective())"/>Objective<br>
-          <input name="qtype" type="radio" value="S" onclick="jQuery(subjective())"/>Subjective-->
+          <input name="qtype" type="radio" value="O" onclick="jQuery(objective())"/>Objective<br>
+          <input name="qtype" type="radio" value="S" onclick="jQuery(subjective())"/>Subjective
       </td>
   </tr>
-  <tr id="objquestions" class="label" >
-      <td colspan="2">
+  <tr id="mmrow" style="display:none"><td class="label">Maximum Marks</td>
+    <td class="content"><input type="number" name="mm" id="mm" value="10" min="1" max="10"></td>
+  </tr>
+  <tr id="objquestions" style="display: none" >
+      <td colspan="2" style="padding-top: 40px">
           <input type="radio" name="correctans" value="0" checked="checked" style="display:none;" />
           <input name="correctans" type="radio" value="A"/><b style="font-size: 18">A</b> <textarea name="txtAoption"></textarea><br><br><br>
           <input name="correctans" type="radio" value="B"/><b style="font-size: 18">B</b> <textarea name="txtBoption"></textarea><br><br><br>
@@ -70,12 +73,12 @@ while($row = dbFetchAssoc($result)) {
 
   
   </tr>
-  <tr id="subquestions" class="label" style="display: none">
+  <tr id="subquestions" style="display: none">
       <td>Answer</td><td><textarea name="correctansS"></textarea></td>
   </tr>
   <tr>
-      <td>Hint</td>
-      <td><textarea name="txthint"></textarea></td>
+      <td class="label">Hint</td>
+      <td class="content"><textarea name="txthint"></textarea></td>
   </tr>
   <tr>
       <td>Explanation</td>

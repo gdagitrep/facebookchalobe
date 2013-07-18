@@ -11,7 +11,7 @@ if (isset($_GET['TopicId']) && $_GET['TopicId'] > 0) {
 	header('Location: index.php');
 }
 
-$sql = "SELECT subt_id, questiontext, type,answer,hint,solution  from questions where Q_id ='$qQ_id';";
+$sql = "SELECT subt_id, questiontext, type,answer,hint,solution,marks  from questions where Q_id ='$qQ_id';";
 $result=  dbQuery($sql) or die('Cannot get Courses. ' . mysql_error());
 $row= dbFetchAssoc($result);
 extract($row);
@@ -26,10 +26,12 @@ if($type=='O'){
     function objective(){
    jQuery('#objquestions').css('display', 'table-row');
    jQuery('#subquestions').css('display', 'none');
+  jQuery('#mmrow').show();  
 }
 function subjective(){
     jQuery('#objquestions').css('display', 'none');
    jQuery('#subquestions').css('display', 'table-row');
+      jQuery('#mmrow').hide();
 }
 </script>
 <p>&nbsp;</p>
@@ -60,13 +62,15 @@ while($row = dbFetchAssoc($result)) {
   </tr>
   <tr><td>Question type</td>
       <td>
-          Objective (only this type is enabled for now)
-<!--          <input name="qtype" type="radio" value="O" onclick="jQuery(objective())" <?php if($type=='O') echo "checked";?>/>Objective<br>
-          <input name="qtype" type="radio" value="S" onclick="jQuery(subjective())" <?php if($type=='S') echo "checked";?>/>Subjective-->
+          <input name="qtype" type="radio" value="O" onclick="jQuery(objective())" <?php if($type=='O') echo "checked";?>/>Objective<br>
+          <input name="qtype" type="radio" value="S" onclick="jQuery(subjective())" <?php if($type=='S') echo "checked";?>/>Subjective
       </td>
   </tr>
-  <tr id="objquestions" class="label" <?php //if($type=='S') {?> <?php //}?>>
-      <td colspan="2">
+  <tr id="mmrow" style="display:none"><td class="label">Maximum Marks</td>
+    <td><input type="number" name="mm" id="mm" value="<?php echo $marks;?>" min="1" max="10"></td>
+  </tr>
+  <tr id="objquestions" <?php if($type=='S') {?>style="display: none"<?php }?>>
+      <td colspan="2" style="padding-top: 40px">
           <input name="correctans" type="radio" value="A"<?php if($answer=='A') echo "checked"?>/><b style="font-size: 18">A</b> <textarea name="txtAoption"><?php if($type=='O') echo $A;?></textarea><br><br><br>
           <input name="correctans" type="radio" value="B"<?php if($answer=='B') echo "checked"?>/><b style="font-size: 18">B</b> <textarea name="txtBoption"><?php if($type=='O') echo $B;?></textarea><br><br><br>
           <input name="correctans" type="radio" value="C"<?php if($answer=='C') echo "checked"?>/><b style="font-size: 18">C</b> <textarea name="txtCoption"><?php if($type=='O') echo $C;?></textarea><br><br><br>
@@ -76,7 +80,7 @@ while($row = dbFetchAssoc($result)) {
 
   
   </tr>
-  <tr id="subquestions" class="label" <?php //if($type=='O') {?>style="display: none"<?php// }?>>
+  <tr id="subquestions" class="label" <?php if($type=='O') {?>style="display: none"<?php }?>>
       <td>Answer</td><td><textarea name="correctansS"><?php if($type=='S') echo $answer;?></textarea></td>
   </tr>
   <tr>

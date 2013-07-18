@@ -29,20 +29,22 @@ function addquestion(){
 	header('Location: index.php');
 }
     $questiontext=$_POST['txtquestiontext'];
-    $qtype= 'O';//$_POST['qtype'];
+    $qtype= $_POST['qtype'];
     $aftersubtopic= $_POST['aftersubtopic'];
     $hint = $_POST['txthint'];
     $explanation= $_POST['txtexp'];
     $result= dbFetchAssoc(dbQuery("select max(Q_id) as s from questions"));
     $qid= $result['s']+1;
     if($qtype== 'O'){
+        $mm=$_POST['mm'];
         $ans= $_POST['correctans'];
     }
     if($qtype == 'S'){
         $ans= $_POST['correctansS'];
+        $mm="0";
     }
-    $result=  dbQuery("insert into questions (Q_id, subt_id,questiontext, type, answer, hint, solution) 
-            values('$qid','$aftersubtopic','$questiontext','$qtype','$ans','$hint','$explanation') ")
+    $result=  dbQuery("insert into questions (Q_id, subt_id,questiontext, type, answer, hint, solution,marks) 
+            values('$qid','$aftersubtopic','$questiontext','$qtype','$ans','$hint','$explanation','$mm') ")
          or die(mysql_error()) ;
     
     if($qtype== 'O'){
@@ -71,19 +73,21 @@ function editquestion(){
 	header('Location: index.php');
 }
     $newquestiontext=$_POST['txtquestiontext'];
-    $newqtype= 'O';//$_POST['qtype'];
+    $newqtype= $_POST['qtype'];
     $newaftersubtopic= $_POST['aftersubtopic'];
     $newhint = $_POST['txthint'];
     $newexplanation= $_POST['txtexp'];
     
     if($newqtype== 'O'){
+        $mm=$_POST['mm'];
         $ans= $_POST['correctans'];
     }
     if($newqtype == 'S'){
+        $mm="0";
         $ans= $_POST['correctansS'];
     }
     $result=  dbQuery("update questions set subt_id='$newaftersubtopic',questiontext='$newquestiontext' , 
-            type = '$newqtype', answer = '$ans', hint='$newhint', solution='$newexplanation' where Q_id= '$qid' ;") or die("question editing error".mysql_error()) ;
+            type = '$newqtype', answer = '$ans', hint='$newhint', solution='$newexplanation', marks='$mm' where Q_id= '$qid' ;") or die("question editing error".mysql_error()) ;
     
     if($newqtype== 'O'){
         $txtAoption= $_POST['txtAoption'];

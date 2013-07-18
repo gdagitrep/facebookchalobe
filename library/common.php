@@ -10,6 +10,17 @@ else{
 }
 require_once 'database.php';
 
+function encrypt($string){
+	$key = 'kahajaogebeta';
+	$encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($key), $string, MCRYPT_MODE_CBC, md5(md5($key))));
+	return urlencode($encrypted);
+}
+function decrypt($encrypted){
+	$key = 'kahajaogebeta';
+	//$encrypted=urldecode($encrypted);
+	$decrypted = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), base64_decode($encrypted), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
+	return $decrypted;
+}
 /*
 	Make sure each key name in $requiredField exist
 	in $_POST and the value is not empty

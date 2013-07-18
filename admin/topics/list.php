@@ -7,7 +7,7 @@ if (!defined('WEB_ROOT')) {
 // how many rows to show per page
 $rowsPerPage = 100;
 
-$sql = "SELECT topic_id, name FROM topics ORDER BY name";
+$sql = "SELECT topics.topic_id as tid, topics.name as tname,courses.name as cname,courses.course_id as cid FROM topics left join courses_topics on topics.topic_id=courses_topics.topic_id left join courses on courses.course_id=courses_topics.course_id ORDER BY topics.topic_id";
 $result     = dbQuery(getPagingQuery($sql, $rowsPerPage));
 $pagingLink = getPagingLink($sql, $rowsPerPage, '');
 
@@ -39,8 +39,8 @@ if (dbNumRows($result) > 0) {
 		$i += 1;
 ?>
   <tr class="<?php echo $class; ?>"> 
-   <td><a href="index.php?view=detail&TopicId=<?php echo $topic_id; ?>&TopicName=<?php echo $name; ?>"><?php echo $name; ?></a></td>
-   <td width="75" align="center"><a href="?c=<?php echo $cat_id."baadmaibanayenge"; ?>"><?php echo $cat_name; ?></a></td>
+   <td><a href="index.php?view=detail&TopicId=<?php echo $tid; ?>&TopicName=<?php echo $tname; ?>"><?php echo $tname; ?></a></td>
+   <td width="75" align="center"><a href="../courses/index.php?view=detail&CourseId=<?php echo $cid; ?>"><?php echo $cname; ?></a></td>
 <!--   <td width="70" align="center"><a href="javascript:modifyTopic(<?php //echo $pd_id; ?>);">Modify</a></td>-->
 <!--   <td width="70" align="center"><a href="javascript:deleteTopic(<?php //echo $pd_id; ?>, <?php //echo $catId; ?>);">Delete</a></td>-->
   </tr>
